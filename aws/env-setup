@@ -13,3 +13,22 @@ AWS_ACCOUNT_ID=xxxxxxxx1695
 gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ gp env AWS_ACCOUNT_IS="xxxxxxxx1695"
 AWS_ACCOUNT_IS=xxxxxxxx1695
 gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
+
+
+BUDGET BILLING Alarm
+====================
+
+Use SNS to send a billing alarm to my email account.
+
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ aws sns create-topic --name billing-alarm
+{
+    "TopicArn": "arn:aws:sns:us-west-2:933248951695:billing-alarm"
+}
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
+
+aws sns subscribe \
+    --topic-arn TopicARN \
+    --protocol email \
+    --notification-endpoint your@email.com
+
+    
