@@ -1,0 +1,15 @@
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ aws sts get-caller-id
+> aws sts get-caller-identity
+{
+    "UserId": "XXXXXXXXXXXXV",
+    "Account": "xxxxxxxx1695",
+    "Arn": "arn:aws:iam::xxxxxxxx1695:user/pd"
+}
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ env AWS_ACCOUNT_ID
+env: ‘AWS_ACCOUNT_ID’: No such file or directory
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ env | grep AWS_ACCOUNT_ID
+AWS_ACCOUNT_ID=xxxxxxxx1695
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ gp env AWS_ACCOUNT_IS="xxxxxxxx1695"
+AWS_ACCOUNT_IS=xxxxxxxx1695
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
