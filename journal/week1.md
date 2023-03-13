@@ -194,3 +194,68 @@ gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $
 gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
 gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
 
+
+root@5028bd9abb3b:/backend-flask# env
+HOSTNAME=5028bd9abb3b
+PYTHON_VERSION=3.10.10
+PWD=/backend-flask
+PYTHON_SETUPTOOLS_VERSION=65.5.1
+HOME=/root
+LANG=C.UTF-8
+GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D
+TERM=xterm
+SHLVL=1
+PYTHON_PIP_VERSION=22.3.1
+PYTHON_GET_PIP_SHA256=394be00f13fa1b9aaa47e911bdb59a09c3b2986472130f30aa0bfaf7f3980637
+PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/d5cb0afaf23b8520f1bbcfed521017b4a95f5c01/public/get-pip.py
+PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+FLASK_ENV=development
+_=/usr/bin/env
+root@5028bd9abb3b:/backend-flask# 
+
+root@5028bd9abb3b:/backend-flask# env | grep END
+root@5028bd9abb3b:/backend-flask# 
+
+docker run --rm -p 4567:4567 -it  --env FRONTEND_URL="*" --env BACKEND_URL="*" backend-flask
+
+
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker run --rm -p 4567:4567 -it --env FRONTEND_URL="*" --env BACKEND_URL="*" backend-flask'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:4567
+ * Running on http://172.17.0.2:4567
+Press CTRL+C to quit
+ * Restarting with stat
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+ * Debugger is active!
+ * Debugger PIN: 124-475-716
+
+
+
+
+ *  Executing task: docker exec -it ba6be21bb45051012dc1ce53d82fd997e9ca4c5054df537c757dedac74b2aab1 bash 
+
+root@ba6be21bb450:/backend-flask# env
+FRONTEND_URL=*
+HOSTNAME=ba6be21bb450
+PYTHON_VERSION=3.10.10
+PWD=/backend-flask
+PYTHON_SETUPTOOLS_VERSION=65.5.1
+HOME=/root
+LANG=C.UTF-8
+GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D
+BACKEND_URL=*
+TERM=xterm
+SHLVL=1
+PYTHON_PIP_VERSION=22.3.1
+PYTHON_GET_PIP_SHA256=394be00f13fa1b9aaa47e911bdb59a09c3b2986472130f30aa0bfaf7f3980637
+PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/d5cb0afaf23b8520f1bbcfed521017b4a95f5c01/public/get-pip.py
+PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+FLASK_ENV=development
+_=/usr/bin/env
+root@ba6be21bb450:/backend-flask# 
