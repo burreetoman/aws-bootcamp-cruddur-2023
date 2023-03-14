@@ -265,3 +265,5 @@ root@ba6be21bb450:/backend-flask#
 docker build -t  backend-flask ./backend-flask
 # Execute from repo level
 docker run --rm -p 4567:4567 -it  --env FRONTEND_URL="*" --env BACKEND_URL="*" backend-flask
+# Run docker container in the background (with -d)
+docker container run --rm -p 4567:4567 -d backend-flask
