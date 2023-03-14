@@ -259,3 +259,7 @@ PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 FLASK_ENV=development
 _=/usr/bin/env
 root@ba6be21bb450:/backend-flask# 
+
+
+docker build -t  backend-flask ./backend-flask
+docker run --rm -p 4567:4567 -it  --env FRONTEND_URL="*" --env BACKEND_URL="*" backend-flask
