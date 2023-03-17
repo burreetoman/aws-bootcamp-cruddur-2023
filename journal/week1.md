@@ -1,5 +1,45 @@
 # Week 1 — App Containerization
 
+tasks:
+  - name: aws-cli
+    env:
+      AWS_CLI_AUTO_PROMPT: on-partial
+    init: |
+      cd /workspace
+      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      unzip awscliv2.zip
+      sudo ./aws/install
+      cd $THEIA_WORKSPACE_ROOT
+vscode:
+  extensions:
+    - 42Crunch.vscode-openapi
+
+
+
+
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ aws sts get-caller-id
+> aws sts get-caller-identity
+{
+    "UserId": "XXXXXXXXXXXXV",
+    "Account": "xxxxxxxx1695",
+    "Arn": "arn:aws:iam::xxxxxxxx1695:user/pd"
+}
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ env AWS_ACCOUNT_ID
+env: ‘AWS_ACCOUNT_ID’: No such file or directory
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ env | grep AWS_ACCOUNT_ID
+AWS_ACCOUNT_ID=xxxxxxxx1695
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ gp env AWS_ACCOUNT_IS="xxxxxxxx1695"
+AWS_ACCOUNT_IS=xxxxxxxx1695
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
+
+
+arn:aws:sns:us-east-1:XXXXXXXX1695:Billing-Alert
+
+
+#---------------------------------------------------------------------------------------------------------------------------------
+
+
 
 /api/activities/home
 
@@ -84,7 +124,7 @@ replies	[]
 uuid	"248959df-3079-4947-b847-9e0892d1bab4"
 
 
-https://4567-burreetoman-awsbootcamp-4p5m4koar62.ws-us90.gitpod.io/api/activities/home
+https://4567-burreetoman-awsbootcamp-4p5m4koar62.ws-us90.gitpod.io
 
 [{"created_at":"2023-03-11T04:36:22.382080+00:00","expires_at":"2023-03-18T04:36:22.382080+00:00","handle":"Andrew Brown","likes_count":5,"message":"Cloud is fun!","replies":[{"created_at":"2023-03-11T04:36:22.382080+00:00","handle":"Worf","likes_count":0,"message":"This post has no honor!","replies_count":0,"reply_to_activity_uuid":"68f126b0-1ceb-4a33-88be-d90fa7109eee","reposts_count":0,"uuid":"26e12864-1c26-5c3a-9658-97a10f8fea67"}],"replies_count":1,"reposts_count":0,"uuid":"68f126b0-1ceb-4a33-88be-d90fa7109eee"},{"created_at":"2023-03-06T04:36:22.382080+00:00","expires_at":"2023-03-22T04:36:22.382080+00:00","handle":"Worf","likes":0,"message":"I am out of prune juice","replies":[],"uuid":"66e12864-8c26-4c3a-9658-95a10f8fea67"},{"created_at":"2023-03-13T03:36:22.382080+00:00","expires_at":"2023-03-13T16:36:22.382080+00:00","handle":"Garek","likes":0,"message":"My dear doctor, I am just simple tailor","replies":[],"uuid":"248959df-3079-4947-b847-9e0892d1bab4"}]
 
@@ -234,11 +274,20 @@ Press CTRL+C to quit
 'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
  * Debugger is active!
  * Debugger PIN: 124-475-716
-
-
-
-
  *  Executing task: docker exec -it ba6be21bb45051012dc1ce53d82fd997e9ca4c5054df537c757dedac74b2aab1 bash 
+
+# Alternate ways to set up ENV variables.
+docker run --rm -p 4567:4567 -it backend-flask
+FRONTEND_URL="*" BACKEND_URL="*" docker run --rm -p 4567:4567 -it backend-flask
+export FRONTEND_URL="*"
+export BACKEND_URL="*"
+docker run --rm -p 4567:4567 -it -e FRONTEND_URL='*' -e BACKEND_URL='*' backend-flask
+docker run --rm -p 4567:4567 -it  -e FRONTEND_URL -e BACKEND_URL backend-flask
+unset FRONTEND_URL="*"
+unset BACKEND_URL="*"
+
+# My prefered:
+docker run --rm -p 4567:4567 -it  --env FRONTEND_URL="*" --env BACKEND_URL="*" backend-flask
 
 root@ba6be21bb450:/backend-flask# env
 FRONTEND_URL=*
@@ -267,3 +316,32 @@ docker build -t  backend-flask ./backend-flask
 docker run --rm -p 4567:4567 -it  --env FRONTEND_URL="*" --env BACKEND_URL="*" backend-flask
 # Run docker container in the background (with -d)
 docker container run --rm -p 4567:4567 -d backend-flask
+
+# DOCKER COMPOSE FILE:
+
+version: "3.8"
+services:
+  backend-flask:
+    environment:
+      FRONTEND_URL: "https://3000-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
+      BACKEND_URL: "https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
+    build: ./backend-flask
+    ports:
+      - "4567:4567"
+    volumes:
+      - ./backend-flask:/backend-flask
+  frontend-react-js:
+    environment:
+      REACT_APP_BACKEND_URL: "https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
+    build: ./frontend-react-js
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend-react-js:/frontend-react-js
+
+# the name flag is a hack to change the default prepend folder
+# name when outputting the image names
+networks: 
+  internal-network:
+    driver: bridge
+    name: cruddur
