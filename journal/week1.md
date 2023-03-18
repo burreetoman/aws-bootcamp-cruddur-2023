@@ -350,6 +350,140 @@ networks:
 # WEEK-1 TRY-OVER TO UNBREAK NTM INSTALL [03.18.2023]:
 # ====================================================
 
+# CONFIGURE DOCKER FILE AND BUILD CONTAINER/IMAGE:
+# ------------------------------------------------
+
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker build -t  backend-flask ./backend-flask
+Sending build context to Docker daemon  33.79kB
+Step 1/8 : FROM python:3.10-slim-buster
+3.10-slim-buster: Pulling from library/python
+8fd419aca81c: Pull complete 
+e53683fb464b: Pull complete 
+ee020a7334e9: Pull complete 
+85e535e79006: Pull complete 
+2cf037f769d8: Pull complete 
+Digest: sha256:520537d39498addbb048e847381108f52659330c0e13438cccb45311395cc870
+Status: Downloaded newer image for python:3.10-slim-buster
+ ---> 83773ada8884
+Step 2/8 : WORKDIR /backend-flask
+ ---> Running in f4c7244cd618
+Removing intermediate container f4c7244cd618
+ ---> 21e8dbf799cb
+Step 3/8 : COPY requirements.txt requirements.txt
+ ---> 0daadf6e5aa3
+Step 4/8 : RUN pip3 install -r requirements.txt
+ ---> Running in e3dde7485b48
+Collecting flask
+  Downloading Flask-2.2.3-py3-none-any.whl (101 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 101.8/101.8 kB 6.5 MB/s eta 0:00:00
+Collecting flask-cors
+  Downloading Flask_Cors-3.0.10-py2.py3-none-any.whl (14 kB)
+Collecting itsdangerous>=2.0
+  Downloading itsdangerous-2.1.2-py3-none-any.whl (15 kB)
+Collecting Werkzeug>=2.2.2
+  Downloading Werkzeug-2.2.3-py3-none-any.whl (233 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 233.6/233.6 kB 27.4 MB/s eta 0:00:00
+Collecting click>=8.0
+  Downloading click-8.1.3-py3-none-any.whl (96 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 96.6/96.6 kB 41.6 MB/s eta 0:00:00
+Collecting Jinja2>=3.0
+  Downloading Jinja2-3.1.2-py3-none-any.whl (133 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 133.1/133.1 kB 49.9 MB/s eta 0:00:00
+Collecting Six
+  Downloading six-1.16.0-py2.py3-none-any.whl (11 kB)
+Collecting MarkupSafe>=2.0
+  Downloading MarkupSafe-2.1.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (25 kB)
+Installing collected packages: Six, MarkupSafe, itsdangerous, click, Werkzeug, Jinja2, flask, flask-cors
+Successfully installed Jinja2-3.1.2 MarkupSafe-2.1.2 Six-1.16.0 Werkzeug-2.2.3 click-8.1.3 flask-2.2.3 flask-cors-3.0.10 itsdangerous-2.1.2
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+
+[notice] A new release of pip available: 22.3.1 -> 23.0.1
+[notice] To update, run: pip install --upgrade pip
+Removing intermediate container e3dde7485b48
+ ---> defeaf8e4896
+Step 5/8 : COPY . .
+ ---> 2a5771aaf470
+Step 6/8 : ENV FLASK_ENV=development
+ ---> Running in 7611b920893e
+Removing intermediate container 7611b920893e
+ ---> e53a9fd77d85
+Step 7/8 : EXPOSE ${PORT}
+ ---> Running in bdcafd3041b0
+Removing intermediate container bdcafd3041b0
+ ---> 96e4e4b89af4
+Step 8/8 : CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567"]
+ ---> Running in a8b9cc7bfa62
+Removing intermediate container a8b9cc7bfa62
+ ---> 4938dada5ebc
+Successfully built 4938dada5ebc
+Successfully tagged backend-flask:latest
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
+
+# ADD URL COMPLETION TO ACTIVE URL FOR BACKEND-FLASK:
+# ---------------------------------------------------
+
+/api/activities/home
+
+# RESULTING JSON OUTPUT FROM FUNCITONING BACKEND-FLASK:
+# -----------------------------------------------------
+
+[
+  {
+    "created_at": "2023-03-16T18:30:06.244103+00:00",
+    "expires_at": "2023-03-23T18:30:06.244103+00:00",
+    "handle": "Andrew Brown",
+    "likes_count": 5,
+    "message": "Cloud is fun!",
+    "replies": [
+      {
+        "created_at": "2023-03-16T18:30:06.244103+00:00",
+        "handle": "Worf",
+        "likes_count": 0,
+        "message": "This post has no honor!",
+        "replies_count": 0,
+        "reply_to_activity_uuid": "68f126b0-1ceb-4a33-88be-d90fa7109eee",
+        "reposts_count": 0,
+        "uuid": "26e12864-1c26-5c3a-9658-97a10f8fea67"
+      }
+    ],
+    "replies_count": 1,
+    "reposts_count": 0,
+    "uuid": "68f126b0-1ceb-4a33-88be-d90fa7109eee"
+  },
+  {
+    "created_at": "2023-03-11T18:30:06.244103+00:00",
+    "expires_at": "2023-03-27T18:30:06.244103+00:00",
+    "handle": "Worf",
+    "likes": 0,
+    "message": "I am out of prune juice",
+    "replies": [],
+    "uuid": "66e12864-8c26-4c3a-9658-95a10f8fea67"
+  },
+  {
+    "created_at": "2023-03-18T17:30:06.244103+00:00",
+    "expires_at": "2023-03-19T06:30:06.244103+00:00",
+    "handle": "Garek",
+    "likes": 0,
+    "message": "My dear doctor, I am just simple tailor",
+    "replies": [],
+    "uuid": "248959df-3079-4947-b847-9e0892d1bab4"
+  }
+]
+
+# RUN CONAINTER IN THE BACKGROUND, ASSIGN CONTAINER-ID TO VARIABLE
+# ----------------------------------------------------------------
+
+CONTAINER_ID=$(docker run --rm -p 4567:4567 -d backend-flask)
+
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ CONTAINER_ID=$(docker run --rm -p 4567:4567 -d backend-flask)
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker ps
+CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+c17f34619288   backend-flask   "python3 -m flask ru…"   21 seconds ago   Up 19 seconds   0.0.0.0:4567->4567/tcp, :::4567->4567/tcp   blissful_joliot
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker images
+REPOSITORY      TAG                IMAGE ID       CREATED          SIZE
+backend-flask   latest             4938dada5ebc   12 minutes ago   130MB
+python          3.10-slim-buster   83773ada8884   40 hours ago     118MB
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
 
 
 
