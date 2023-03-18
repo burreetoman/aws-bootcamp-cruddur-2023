@@ -485,6 +485,376 @@ backend-flask   latest             4938dada5ebc   12 minutes ago   130MB
 python          3.10-slim-buster   83773ada8884   40 hours ago     118MB
 gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
 
+# CURL TEST SERVER
+# ----------------
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ curl -X GET http://localhost:4567/api/activities/home -H "Accept: application/json" -H "Content-Type: application/json"
+<!doctype html>
+<html lang=en>
+  <head>
+    <title>TypeError: argument of type 'NoneType' is not iterable
+ // Werkzeug Debugger</title>
+    <link rel="stylesheet" href="?__debugger__=yes&amp;cmd=resource&amp;f=style.css">
+    <link rel="shortcut icon"
+        href="?__debugger__=yes&amp;cmd=resource&amp;f=console.png">
+    <script src="?__debugger__=yes&amp;cmd=resource&amp;f=debugger.js"></script>
+    <script>
+      var CONSOLE_MODE = false,
+          EVALEX = true,
+          EVALEX_TRUSTED = false,
+          SECRET = "IABiWD81qnn3jr9SJOqn";
+    </script>
+  </head>
+  <body style="background-color: #fff">
+    <div class="debugger">
+<h1>TypeError</h1>
+<div class="detail">
+  <p class="errormsg">TypeError: argument of type &#39;NoneType&#39; is not iterable
+</p>
+</div>
+<h2 class="traceback">Traceback <em>(most recent call last)</em></h2>
+<div class="traceback">
+  <h3></h3>
+  <ul><li><div class="frame" id="frame-140169385192000">
+  <h4>File <cite class="filename">"/usr/local/lib/python3.10/site-packages/flask/app.py"</cite>,
+      line <em class="line">2551</em>,
+      in <code class="function">__call__</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">    </span>def __call__(self, environ: dict, start_response: t.Callable) -&gt; t.Any:</pre>
+<pre class="line before"><span class="ws">        </span>&#34;&#34;&#34;The WSGI server calls the Flask application object as the</pre>
+<pre class="line before"><span class="ws">        </span>WSGI application. This calls :meth:`wsgi_app`, which can be</pre>
+<pre class="line before"><span class="ws">        </span>wrapped to apply middleware.</pre>
+<pre class="line before"><span class="ws">        </span>&#34;&#34;&#34;</pre>
+<pre class="line current"><span class="ws">        </span>return self.wsgi_app(environ, start_response)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-140169385737264">
+  <h4>File <cite class="filename">"/usr/local/lib/python3.10/site-packages/flask/app.py"</cite>,
+      line <em class="line">2531</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>ctx.push()</pre>
+<pre class="line before"><span class="ws">                </span>response = self.full_dispatch_request()</pre>
+<pre class="line before"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line before"><span class="ws">                </span>error = e</pre>
+<pre class="line current"><span class="ws">                </span>response = self.handle_exception(e)</pre>
+<pre class="line after"><span class="ws">            </span>except:  # noqa: B001</pre>
+<pre class="line after"><span class="ws">                </span>error = sys.exc_info()[1]</pre>
+<pre class="line after"><span class="ws">                </span>raise</pre>
+<pre class="line after"><span class="ws">            </span>return response(environ, start_response)</pre>
+<pre class="line after"><span class="ws">        </span>finally:</pre></div>
+</div>
+
+<li><div class="frame" id="frame-140169385737376">
+  <h4>File <cite class="filename">"/usr/local/lib/python3.10/site-packages/flask_cors/extension.py"</cite>,
+      line <em class="line">165</em>,
+      in <code class="function">wrapped_function</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">        </span># Wrap exception handlers with cross_origin</pre>
+<pre class="line before"><span class="ws">        </span># These error handlers will still respect the behavior of the route</pre>
+<pre class="line before"><span class="ws">        </span>if options.get(&#39;intercept_exceptions&#39;, True):</pre>
+<pre class="line before"><span class="ws">            </span>def _after_request_decorator(f):</pre>
+<pre class="line before"><span class="ws">                </span>def wrapped_function(*args, **kwargs):</pre>
+<pre class="line current"><span class="ws">                    </span>return cors_after_request(app.make_response(f(*args, **kwargs)))</pre>
+<pre class="line after"><span class="ws">                </span>return wrapped_function</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">            </span>if hasattr(app, &#39;handle_exception&#39;):</pre>
+<pre class="line after"><span class="ws">                </span>app.handle_exception = _after_request_decorator(</pre>
+<pre class="line after"><span class="ws">                    </span>app.handle_exception)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-140169385805968">
+  <h4>File <cite class="filename">"/usr/local/lib/python3.10/site-packages/flask/app.py"</cite>,
+      line <em class="line">2528</em>,
+      in <code class="function">wsgi_app</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">        </span>ctx = self.request_context(environ)</pre>
+<pre class="line before"><span class="ws">        </span>error: t.Optional[BaseException] = None</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line before"><span class="ws">            </span>try:</pre>
+<pre class="line before"><span class="ws">                </span>ctx.push()</pre>
+<pre class="line current"><span class="ws">                </span>response = self.full_dispatch_request()</pre>
+<pre class="line after"><span class="ws">            </span>except Exception as e:</pre>
+<pre class="line after"><span class="ws">                </span>error = e</pre>
+<pre class="line after"><span class="ws">                </span>response = self.handle_exception(e)</pre>
+<pre class="line after"><span class="ws">            </span>except:  # noqa: B001</pre>
+<pre class="line after"><span class="ws">                </span>error = sys.exc_info()[1]</pre></div>
+</div>
+
+<li><div class="frame" id="frame-140169385806080">
+  <h4>File <cite class="filename">"/usr/local/lib/python3.10/site-packages/flask/app.py"</cite>,
+      line <em class="line">1826</em>,
+      in <code class="function">full_dispatch_request</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">            </span>rv = self.preprocess_request()</pre>
+<pre class="line before"><span class="ws">            </span>if rv is None:</pre>
+<pre class="line before"><span class="ws">                </span>rv = self.dispatch_request()</pre>
+<pre class="line before"><span class="ws">        </span>except Exception as e:</pre>
+<pre class="line before"><span class="ws">            </span>rv = self.handle_user_exception(e)</pre>
+<pre class="line current"><span class="ws">        </span>return self.finalize_request(rv)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>def finalize_request(</pre>
+<pre class="line after"><span class="ws">        </span>self,</pre>
+<pre class="line after"><span class="ws">        </span>rv: t.Union[ft.ResponseReturnValue, HTTPException],</pre>
+<pre class="line after"><span class="ws">        </span>from_error_handler: bool = False,</pre></div>
+</div>
+
+<li><div class="frame" id="frame-140169385806192">
+  <h4>File <cite class="filename">"/usr/local/lib/python3.10/site-packages/flask/app.py"</cite>,
+      line <em class="line">1847</em>,
+      in <code class="function">finalize_request</code></h4>
+  <div class="source "><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>:internal:</pre>
+<pre class="line before"><span class="ws">        </span>&#34;&#34;&#34;</pre>
+<pre class="line before"><span class="ws">        </span>response = self.make_response(rv)</pre>
+<pre class="line before"><span class="ws">        </span>try:</pre>
+<pre class="line current"><span class="ws">            </span>response = self.process_response(response)</pre>
+<pre class="line after"><span class="ws">            </span>request_finished.send(self, response=response)</pre>
+<pre class="line after"><span class="ws">        </span>except Exception:</pre>
+<pre class="line after"><span class="ws">            </span>if not from_error_handler:</pre>
+<pre class="line after"><span class="ws">                </span>raise</pre>
+<pre class="line after"><span class="ws">            </span>self.logger.exception(</pre></div>
+</div>
+
+<li><div class="frame" id="frame-140169385806304">
+  <h4>File <cite class="filename">"/usr/local/lib/python3.10/site-packages/flask/app.py"</cite>,
+      line <em class="line">2340</em>,
+      in <code class="function">process_response</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">            </span>response = self.ensure_sync(func)(response)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">        </span>for name in chain(request.blueprints, (None,)):</pre>
+<pre class="line before"><span class="ws">            </span>if name in self.after_request_funcs:</pre>
+<pre class="line before"><span class="ws">                </span>for func in reversed(self.after_request_funcs[name]):</pre>
+<pre class="line current"><span class="ws">                    </span>response = self.ensure_sync(func)(response)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>if not self.session_interface.is_null_session(ctx.session):</pre>
+<pre class="line after"><span class="ws">            </span>self.session_interface.save_session(self, ctx.session, response)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">        </span>return response</pre></div>
+</div>
+
+<li><div class="frame" id="frame-140169385806416">
+  <h4>File <cite class="filename">"/usr/local/lib/python3.10/site-packages/flask_cors/extension.py"</cite>,
+      line <em class="line">185</em>,
+      in <code class="function">cors_after_request</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">        </span>normalized_path = unquote_plus(request.path)</pre>
+<pre class="line before"><span class="ws">        </span>for res_regex, res_options in resources:</pre>
+<pre class="line before"><span class="ws">            </span>if try_match(normalized_path, res_regex):</pre>
+<pre class="line before"><span class="ws">                </span>LOG.debug(&#34;Request to &#39;%s&#39; matches CORS resource &#39;%s&#39;. Using options: %s&#34;,</pre>
+<pre class="line before"><span class="ws">                      </span>request.path, get_regexp_pattern(res_regex), res_options)</pre>
+<pre class="line current"><span class="ws">                </span>set_cors_headers(resp, res_options)</pre>
+<pre class="line after"><span class="ws">                </span>break</pre>
+<pre class="line after"><span class="ws">        </span>else:</pre>
+<pre class="line after"><span class="ws">            </span>LOG.debug(&#39;No CORS rule matches&#39;)</pre>
+<pre class="line after"><span class="ws">        </span>return resp</pre>
+<pre class="line after"><span class="ws">    </span>return cors_after_request</pre></div>
+</div>
+
+<li><div class="frame" id="frame-140169385806528">
+  <h4>File <cite class="filename">"/usr/local/lib/python3.10/site-packages/flask_cors/core.py"</cite>,
+      line <em class="line">245</em>,
+      in <code class="function">set_cors_headers</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">    </span># headers allow repeated values.</pre>
+<pre class="line before"><span class="ws">    </span>if (not isinstance(resp.headers, Headers)</pre>
+<pre class="line before"><span class="ws">           </span>and not isinstance(resp.headers, MultiDict)):</pre>
+<pre class="line before"><span class="ws">        </span>resp.headers = MultiDict(resp.headers)</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line current"><span class="ws">    </span>headers_to_set = get_cors_headers(options, request.headers, request.method)</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>LOG.debug(&#39;Settings CORS headers: %s&#39;, str(headers_to_set))</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>for k, v in headers_to_set.items():</pre>
+<pre class="line after"><span class="ws">        </span>resp.headers.add(k, v)</pre></div>
+</div>
+
+<li><div class="frame" id="frame-140169385811904">
+  <h4>File <cite class="filename">"/usr/local/lib/python3.10/site-packages/flask_cors/core.py"</cite>,
+      line <em class="line">177</em>,
+      in <code class="function">get_cors_headers</code></h4>
+  <div class="source "><pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws">    </span>return None</pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws"></span> </pre>
+<pre class="line before"><span class="ws"></span>def get_cors_headers(options, request_headers, request_method):</pre>
+<pre class="line current"><span class="ws">    </span>origins_to_set = get_cors_origins(options, request_headers.get(&#39;Origin&#39;))</pre>
+<pre class="line after"><span class="ws">    </span>headers = MultiDict()</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span>if not origins_to_set:  # CORS is not enabled for this route</pre>
+<pre class="line after"><span class="ws">        </span>return headers</pre>
+<pre class="line after"><span class="ws"></span> </pre></div>
+</div>
+
+<li><div class="frame" id="frame-140169385812016">
+  <h4>File <cite class="filename">"/usr/local/lib/python3.10/site-packages/flask_cors/core.py"</cite>,
+      line <em class="line">153</em>,
+      in <code class="function">get_cors_origins</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">                </span>return None</pre>
+<pre class="line before"><span class="ws">            </span>else:</pre>
+<pre class="line before"><span class="ws">                </span>return [&#39;*&#39;]</pre>
+<pre class="line before"><span class="ws">        </span>else:</pre>
+<pre class="line before"><span class="ws">            </span># Return all origins that are not regexes.</pre>
+<pre class="line current"><span class="ws">            </span>return sorted([o for o in origins if not probably_regex(o)])</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span># Terminate these steps, return the original request untouched.</pre>
+<pre class="line after"><span class="ws">    </span>else:</pre>
+<pre class="line after"><span class="ws">        </span>LOG.debug(&#34;The request did not contain an &#39;Origin&#39; header. This means the browser or client did not request CORS, ensure the Origin Header is set.&#34;)</pre>
+<pre class="line after"><span class="ws">        </span>return None</pre></div>
+</div>
+
+<li><div class="frame" id="frame-140169385812128">
+  <h4>File <cite class="filename">"/usr/local/lib/python3.10/site-packages/flask_cors/core.py"</cite>,
+      line <em class="line">153</em>,
+      in <code class="function">&lt;listcomp&gt;</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">                </span>return None</pre>
+<pre class="line before"><span class="ws">            </span>else:</pre>
+<pre class="line before"><span class="ws">                </span>return [&#39;*&#39;]</pre>
+<pre class="line before"><span class="ws">        </span>else:</pre>
+<pre class="line before"><span class="ws">            </span># Return all origins that are not regexes.</pre>
+<pre class="line current"><span class="ws">            </span>return sorted([o for o in origins if not probably_regex(o)])</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws">    </span># Terminate these steps, return the original request untouched.</pre>
+<pre class="line after"><span class="ws">    </span>else:</pre>
+<pre class="line after"><span class="ws">        </span>LOG.debug(&#34;The request did not contain an &#39;Origin&#39; header. This means the browser or client did not request CORS, ensure the Origin Header is set.&#34;)</pre>
+<pre class="line after"><span class="ws">        </span>return None</pre></div>
+</div>
+
+<li><div class="frame" id="frame-140169385812240">
+  <h4>File <cite class="filename">"/usr/local/lib/python3.10/site-packages/flask_cors/core.py"</cite>,
+      line <em class="line">261</em>,
+      in <code class="function">probably_regex</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">        </span>return True</pre>
+<pre class="line before"><span class="ws">    </span>else:</pre>
+<pre class="line before"><span class="ws">        </span>common_regex_chars = [&#39;*&#39;, &#39;\\&#39;, &#39;]&#39;, &#39;?&#39;, &#39;$&#39;, &#39;^&#39;, &#39;[&#39;, &#39;]&#39;, &#39;(&#39;, &#39;)&#39;]</pre>
+<pre class="line before"><span class="ws">        </span># Use common characters used in regular expressions as a proxy</pre>
+<pre class="line before"><span class="ws">        </span># for if this string is in fact a regex.</pre>
+<pre class="line current"><span class="ws">        </span>return any((c in maybe_regex for c in common_regex_chars))</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws"></span>def re_fix(reg):</pre>
+<pre class="line after"><span class="ws">    </span>&#34;&#34;&#34;</pre>
+<pre class="line after"><span class="ws">        </span>Replace the invalid regex r&#39;*&#39; with the valid, wildcard regex r&#39;/.*&#39; to</pre>
+<pre class="line after"><span class="ws">        </span>enable the CORS app extension to have a more user friendly api.</pre></div>
+</div>
+
+<li><div class="frame" id="frame-140169385812352">
+  <h4>File <cite class="filename">"/usr/local/lib/python3.10/site-packages/flask_cors/core.py"</cite>,
+      line <em class="line">261</em>,
+      in <code class="function">&lt;genexpr&gt;</code></h4>
+  <div class="source "><pre class="line before"><span class="ws">        </span>return True</pre>
+<pre class="line before"><span class="ws">    </span>else:</pre>
+<pre class="line before"><span class="ws">        </span>common_regex_chars = [&#39;*&#39;, &#39;\\&#39;, &#39;]&#39;, &#39;?&#39;, &#39;$&#39;, &#39;^&#39;, &#39;[&#39;, &#39;]&#39;, &#39;(&#39;, &#39;)&#39;]</pre>
+<pre class="line before"><span class="ws">        </span># Use common characters used in regular expressions as a proxy</pre>
+<pre class="line before"><span class="ws">        </span># for if this string is in fact a regex.</pre>
+<pre class="line current"><span class="ws">        </span>return any((c in maybe_regex for c in common_regex_chars))</pre>
+<pre class="line after"><span class="ws"></span> </pre>
+<pre class="line after"><span class="ws"></span>def re_fix(reg):</pre>
+<pre class="line after"><span class="ws">    </span>&#34;&#34;&#34;</pre>
+<pre class="line after"><span class="ws">        </span>Replace the invalid regex r&#39;*&#39; with the valid, wildcard regex r&#39;/.*&#39; to</pre>
+<pre class="line after"><span class="ws">        </span>enable the CORS app extension to have a more user friendly api.</pre></div>
+</div>
+</ul>
+  <blockquote>TypeError: argument of type &#39;NoneType&#39; is not iterable
+</blockquote>
+</div>
+
+<div class="plain">
+    <p>
+      This is the Copy/Paste friendly version of the traceback.
+    </p>
+    <textarea cols="50" rows="10" name="code" readonly>Traceback (most recent call last):
+  File &#34;/usr/local/lib/python3.10/site-packages/flask/app.py&#34;, line 2551, in __call__
+    return self.wsgi_app(environ, start_response)
+  File &#34;/usr/local/lib/python3.10/site-packages/flask/app.py&#34;, line 2531, in wsgi_app
+    response = self.handle_exception(e)
+  File &#34;/usr/local/lib/python3.10/site-packages/flask_cors/extension.py&#34;, line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File &#34;/usr/local/lib/python3.10/site-packages/flask/app.py&#34;, line 2528, in wsgi_app
+    response = self.full_dispatch_request()
+  File &#34;/usr/local/lib/python3.10/site-packages/flask/app.py&#34;, line 1826, in full_dispatch_request
+    return self.finalize_request(rv)
+  File &#34;/usr/local/lib/python3.10/site-packages/flask/app.py&#34;, line 1847, in finalize_request
+    response = self.process_response(response)
+  File &#34;/usr/local/lib/python3.10/site-packages/flask/app.py&#34;, line 2340, in process_response
+    response = self.ensure_sync(func)(response)
+  File &#34;/usr/local/lib/python3.10/site-packages/flask_cors/extension.py&#34;, line 185, in cors_after_request
+    set_cors_headers(resp, res_options)
+  File &#34;/usr/local/lib/python3.10/site-packages/flask_cors/core.py&#34;, line 245, in set_cors_headers
+    headers_to_set = get_cors_headers(options, request.headers, request.method)
+  File &#34;/usr/local/lib/python3.10/site-packages/flask_cors/core.py&#34;, line 177, in get_cors_headers
+    origins_to_set = get_cors_origins(options, request_headers.get(&#39;Origin&#39;))
+  File &#34;/usr/local/lib/python3.10/site-packages/flask_cors/core.py&#34;, line 153, in get_cors_origins
+    return sorted([o for o in origins if not probably_regex(o)])
+  File &#34;/usr/local/lib/python3.10/site-packages/flask_cors/core.py&#34;, line 153, in &lt;listcomp&gt;
+    return sorted([o for o in origins if not probably_regex(o)])
+  File &#34;/usr/local/lib/python3.10/site-packages/flask_cors/core.py&#34;, line 261, in probably_regex
+    return any((c in maybe_regex for c in common_regex_chars))
+  File &#34;/usr/local/lib/python3.10/site-packages/flask_cors/core.py&#34;, line 261, in &lt;genexpr&gt;
+    return any((c in maybe_regex for c in common_regex_chars))
+TypeError: argument of type &#39;NoneType&#39; is not iterable
+</textarea>
+</div>
+<div class="explanation">
+  The debugger caught an exception in your WSGI application.  You can now
+  look at the traceback which led to the error.  <span class="nojavascript">
+  If you enable JavaScript you can also use additional features such as code
+  execution (if the evalex feature is enabled), automatic pasting of the
+  exceptions and much more.</span>
+</div>
+      <div class="footer">
+        Brought to you by <strong class="arthur">DON'T PANIC</strong>, your
+        friendly Werkzeug powered traceback interpreter.
+      </div>
+    </div>
+
+    <div class="pin-prompt">
+      <div class="inner">
+        <h3>Console Locked</h3>
+        <p>
+          The console is locked and needs to be unlocked by entering the PIN.
+          You can find the PIN printed out on the standard output of your
+          shell that runs the server.
+        <form>
+          <p>PIN:
+            <input type=text name=pin size=14>
+            <input type=submit name=btn value="Confirm Pin">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!--
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 2551, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 2531, in wsgi_app
+    response = self.handle_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1826, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1847, in finalize_request
+    response = self.process_response(response)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 2340, in process_response
+    response = self.ensure_sync(func)(response)
+  File "/usr/local/lib/python3.10/site-packages/flask_cors/extension.py", line 185, in cors_after_request
+    set_cors_headers(resp, res_options)
+  File "/usr/local/lib/python3.10/site-packages/flask_cors/core.py", line 245, in set_cors_headers
+    headers_to_set = get_cors_headers(options, request.headers, request.method)
+  File "/usr/local/lib/python3.10/site-packages/flask_cors/core.py", line 177, in get_cors_headers
+    origins_to_set = get_cors_origins(options, request_headers.get('Origin'))
+  File "/usr/local/lib/python3.10/site-packages/flask_cors/core.py", line 153, in get_cors_origins
+    return sorted([o for o in origins if not probably_regex(o)])
+  File "/usr/local/lib/python3.10/site-packages/flask_cors/core.py", line 153, in <listcomp>
+    return sorted([o for o in origins if not probably_regex(o)])
+  File "/usr/local/lib/python3.10/site-packages/flask_cors/core.py", line 261, in probably_regex
+    return any((c in maybe_regex for c in common_regex_chars))
+  File "/usr/local/lib/python3.10/site-packages/flask_cors/core.py", line 261, in <genexpr>
+    return any((c in maybe_regex for c in common_regex_chars))
+TypeError: argument of type 'NoneType' is not iterable
+
+
+-->
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
+
+
 
 
 
