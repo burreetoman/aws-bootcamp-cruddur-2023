@@ -1057,7 +1057,40 @@ Press CTRL+C to quit
 172.17.0.1 - - [18/Mar/2023 19:06:35] "GET /api/activities/home HTTP/1.1" 200 -
 gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
 
-# 
+# GAINING ACCESS TO THE INSIDE DOCKER CONTAINER
+#     Access was gained using the Docker extension Container tool right-click on container, select "Attach Shell"
+#     exit<enter> or ctrl-c to exit from container
+
+ Executing task: docker logs --tail 1000 -f c3d5e3f91cf4f0f38772647a41230ccf1d2bf000a5f2a45a87847586e05ea725 
+
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:4567
+ * Running on http://172.17.0.2:4567
+Press CTRL+C to quit
+ * Restarting with stat
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+ * Debugger is active!
+ * Debugger PIN: 124-475-803
+192.168.195.11 - - [18/Mar/2023 19:17:53] "GET / HTTP/1.1" 404 -
+192.168.195.11 - - [18/Mar/2023 19:19:29] "GET /api/activities/home HTTP/1.1" 200 -
+
+#     ACCESS USING THE COMMAND LINE FAILED (TRY AGAIN LATER)
+
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ echo $CONTAINER_ID
+c3d5e3f91cf4f0f38772647a41230ccf1d2bf000a5f2a45a87847586e05ea725
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker ps
+CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+c3d5e3f91cf4   backend-flask   "python3 -m flask ru…"   11 minutes ago   Up 11 minutes   0.0.0.0:4567->4567/tcp, :::4567->4567/tcp   youthful_sammet
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker exec $CONTAINER_ID -it /bin/bash
+OCI runtime exec failed: exec failed: unable to start container process: exec: "-it": executable file not found in $PATH: unknown
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
 
 
 
