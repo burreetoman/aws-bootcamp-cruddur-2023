@@ -854,14 +854,210 @@ TypeError: argument of type 'NoneType' is not iterable
 -->
 gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
 
+# -------------------------------------------------------------
+# CHECK CONTAINER LOGS WITH CONTAINER RUNNING IN THE BACKGROUND
+# -------------------------------------------------------------
 
+# THIS RUN OF BANCEND_FLAKS FAILED BECAUSE THE ENVIRONMENT VARIABLES WERE NOT SET PRIOR TO RUNNING THE CONTAINER
+# --------------------------------------------------------------------------------------------------------------
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ CONTAINER_ID=$(docker run --rm -p 4567:4567 -d backend-flask)
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker logs $CONTAINER_ID -f
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:4567
+ * Running on http://172.17.0.2:4567
+Press CTRL+C to quit
+ * Restarting with stat
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+ * Debugger is active!
+ * Debugger PIN: 124-475-803
+192.168.105.142 - - [18/Mar/2023 18:49:51] "GET / HTTP/1.1" 404 -
+192.168.105.142 - - [18/Mar/2023 18:50:32] "GET /api/activities/home HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 2551, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 2531, in wsgi_app
+    response = self.handle_exception(e)
+  File "/usr/local/lib/python3.10/site-packages/flask_cors/extension.py", line 165, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1826, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 1847, in finalize_request
+    response = self.process_response(response)
+  File "/usr/local/lib/python3.10/site-packages/flask/app.py", line 2340, in process_response
+    response = self.ensure_sync(func)(response)
+  File "/usr/local/lib/python3.10/site-packages/flask_cors/extension.py", line 185, in cors_after_request
+    set_cors_headers(resp, res_options)
+  File "/usr/local/lib/python3.10/site-packages/flask_cors/core.py", line 245, in set_cors_headers
+    headers_to_set = get_cors_headers(options, request.headers, request.method)
+  File "/usr/local/lib/python3.10/site-packages/flask_cors/core.py", line 177, in get_cors_headers
+    origins_to_set = get_cors_origins(options, request_headers.get('Origin'))
+  File "/usr/local/lib/python3.10/site-packages/flask_cors/core.py", line 153, in get_cors_origins
+    return sorted([o for o in origins if not probably_regex(o)])
+  File "/usr/local/lib/python3.10/site-packages/flask_cors/core.py", line 153, in <listcomp>
+    return sorted([o for o in origins if not probably_regex(o)])
+  File "/usr/local/lib/python3.10/site-packages/flask_cors/core.py", line 261, in probably_regex
+    return any((c in maybe_regex for c in common_regex_chars))
+  File "/usr/local/lib/python3.10/site-packages/flask_cors/core.py", line 261, in <genexpr>
+    return any((c in maybe_regex for c in common_regex_chars))
+TypeError: argument of type 'NoneType' is not iterable
+192.168.105.142 - - [18/Mar/2023 18:50:32] "GET /api/activities/home?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+192.168.105.142 - - [18/Mar/2023 18:50:32] "GET /api/activities/home?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+192.168.105.142 - - [18/Mar/2023 18:50:32] "GET /api/activities/home?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+^C
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
 
+# SUCCESSFUL ATTEMPT TO RUN BACKEND_FLASK IN BACKGROUND AND GRAB LOGS AND CURL THE URL
+# ------------------------------------------------------------------------------------
 
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ env | grep BAACKEND
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ env | grep BACKEND
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker run --rm -p 4567:4567 -it  --env FRONTEND_URL="*" --env BACKEND_URL="*" backend-flask^C
 
+# ENV VARS INJECTED INTO ENV AT EXECUATION OF BACK_FLASK CONTAINER.
+#   ERROR GENERATED BECAUSE CONTAINER WAS ALREADY RUNNING USING THE SAME PORT 4567
 
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ CONTAINER_ID=$(docker run --rm -p 4567:4567 --env FRONTEND_URL="*" --env BACKEND_URL="*" -d backend-flask)docker: Error response from daemon: driver failed programming external connectivity on endpoint competent_brattain (d42974405ba91c5e1de8bae5d9172bca5f9eec1c2e574ea0c642868c60650b0e): Bind for 0.0.0.0:4567 failed: port is already allocated.
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
 
+# BELOW IS A SUCCESSFUL RUN OF THE CONTAINER WITH THE ENV VARS INJECTED PRIOR
+# DOCKER LOG OF THIS CONTAINER FOLLOWS
 
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ CONTAINER_ID=$(docker run --rm -p 4567:4567 --env FRONTEND_URL="*" --env BACKEND_URL="*" -d backend-flask)gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker logs $CONTAINER_ID -f
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:4567
+ * Running on http://172.17.0.2:4567
+Press CTRL+C to quit
+ * Restarting with stat
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+ * Debugger is active!
+ * Debugger PIN: 124-475-803
+192.168.195.11 - - [18/Mar/2023 19:02:44] "GET / HTTP/1.1" 404 -
+192.168.195.11 - - [18/Mar/2023 19:02:44] "GET /favicon.ico HTTP/1.1" 404 -
+192.168.195.11 - - [18/Mar/2023 19:05:08] "GET /api/activities/home HTTP/1.1" 200 -
+^C
 
+# DOCKER IMAGE AND CONTAINER STATES
+
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker ps
+CONTAINER ID   IMAGE           COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+9fc075296429   backend-flask   "python3 -m flask ru…"   3 minutes ago   Up 3 minutes   0.0.0.0:4567->4567/tcp, :::4567->4567/tcp   intelligent_shockley
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker images
+REPOSITORY      TAG                IMAGE ID       CREATED          SIZE
+backend-flask   latest             4938dada5ebc   41 minutes ago   130MB
+python          3.10-slim-buster   83773ada8884   40 hours ago     118MB
+
+# DOCKER LOG 
+
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker logs $CONTAINER_ID -f
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:4567
+ * Running on http://172.17.0.2:4567
+Press CTRL+C to quit
+ * Restarting with stat
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+ * Debugger is active!
+ * Debugger PIN: 124-475-803
+192.168.195.11 - - [18/Mar/2023 19:02:44] "GET / HTTP/1.1" 404 -
+192.168.195.11 - - [18/Mar/2023 19:02:44] "GET /favicon.ico HTTP/1.1" 404 -
+192.168.195.11 - - [18/Mar/2023 19:05:08] "GET /api/activities/home HTTP/1.1" 200 -
+^C
+
+# CURL AGAINST RUNNING BACKEND_FLASK CONTAINER
+
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ curl -X GET http://localhost:4567/api/activities/home -H "Accept: application/json" -H "Content-Type: application/json"
+[
+  {
+    "created_at": "2023-03-16T19:06:35.848761+00:00",
+    "expires_at": "2023-03-23T19:06:35.848761+00:00",
+    "handle": "Andrew Brown",
+    "likes_count": 5,
+    "message": "Cloud is fun!",
+    "replies": [
+      {
+        "created_at": "2023-03-16T19:06:35.848761+00:00",
+        "handle": "Worf",
+        "likes_count": 0,
+        "message": "This post has no honor!",
+        "replies_count": 0,
+        "reply_to_activity_uuid": "68f126b0-1ceb-4a33-88be-d90fa7109eee",
+        "reposts_count": 0,
+        "uuid": "26e12864-1c26-5c3a-9658-97a10f8fea67"
+      }
+    ],
+    "replies_count": 1,
+    "reposts_count": 0,
+    "uuid": "68f126b0-1ceb-4a33-88be-d90fa7109eee"
+  },
+  {
+    "created_at": "2023-03-11T19:06:35.848761+00:00",
+    "expires_at": "2023-03-27T19:06:35.848761+00:00",
+    "handle": "Worf",
+    "likes": 0,
+    "message": "I am out of prune juice",
+    "replies": [],
+    "uuid": "66e12864-8c26-4c3a-9658-95a10f8fea67"
+  },
+  {
+    "created_at": "2023-03-18T18:06:35.848761+00:00",
+    "expires_at": "2023-03-19T07:06:35.848761+00:00",
+    "handle": "Garek",
+    "likes": 0,
+    "message": "My dear doctor, I am just simple tailor",
+    "replies": [],
+    "uuid": "248959df-3079-4947-b847-9e0892d1bab4"
+  }
+]
+
+# FULL DOCKER LOG OF ALL CONTAINER ACTIVITIES FROM ABOVE.
+# CONTAINER IS TERMINATED THROUGH USE OF DOCKER EXTENSION AT END OF THIS SECTION (NOTHING TO SEE REALLY)
+
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker logs $CONTAINER_ID -f
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:4567
+ * Running on http://172.17.0.2:4567
+Press CTRL+C to quit
+ * Restarting with stat
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+ * Debugger is active!
+ * Debugger PIN: 124-475-803
+192.168.195.11 - - [18/Mar/2023 19:02:44] "GET / HTTP/1.1" 404 -
+192.168.195.11 - - [18/Mar/2023 19:02:44] "GET /favicon.ico HTTP/1.1" 404 -
+192.168.195.11 - - [18/Mar/2023 19:05:08] "GET /api/activities/home HTTP/1.1" 200 -
+172.17.0.1 - - [18/Mar/2023 19:06:35] "GET /api/activities/home HTTP/1.1" 200 -
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
+
+# 
 
 
 
