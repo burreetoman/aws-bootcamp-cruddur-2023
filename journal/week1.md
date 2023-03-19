@@ -1093,6 +1093,196 @@ OCI runtime exec failed: exec failed: unable to start container process: exec: "
 gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
 
 
+# INSTALLING NPM
+
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ cd frontend*
+gitpod /workspace/aws-bootcamp-cruddur-2023/frontend-react-js (main) $ ls -l 
+total 1504
+-rw-r--r-- 1 gitpod gitpod     923 Mar 18 18:08 package.json
+-rw-r--r-- 1 gitpod gitpod 1524661 Mar 18 18:08 package-lock.json
+drwxr-xr-x 2 gitpod gitpod    4096 Mar 18 18:08 public
+-rw-r--r-- 1 gitpod gitpod      32 Mar 18 18:08 README.md
+drwxr-xr-x 4 gitpod gitpod     181 Mar 18 18:08 src
+gitpod /workspace/aws-bootcamp-cruddur-2023/frontend-react-js (main) $ cat README.md
+## Frontend React JS
+
+gitpod /workspace/aws-bootcamp-cruddur-2023/frontend-react-js (main) $ cat README.md^C
+gitpod /workspace/aws-bootcamp-cruddur-2023/frontend-react-js (main) $ 
+gitpod /workspace/aws-bootcamp-cruddur-2023/frontend-react-js (main) $ 
+gitpod /workspace/aws-bootcamp-cruddur-2023/frontend-react-js (main) $ 
+gitpod /workspace/aws-bootcamp-cruddur-2023/frontend-react-js (main) $ 
+gitpod /workspace/aws-bootcamp-cruddur-2023/frontend-react-js (main) $ 
+gitpod /workspace/aws-bootcamp-cruddur-2023/frontend-react-js (main) $ npm i
+npm WARN deprecated w3c-hr-time@1.0.2: Use your platform's native performance.now() and performance.timeOrigin.
+npm WARN deprecated urix@0.1.0: Please see https://github.com/lydell/urix#deprecated
+npm WARN deprecated topo@2.0.2: This version has been deprecated in accordance with the hapi support policy (hapi.im/support). Please upgrade to the latest version to get the best features, bug fixes, and security patches. If you are unable to upgrade at this time, paid support is available for older versions (hapi.im/commercial).
+npm WARN deprecated uuid@3.4.0: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+npm WARN deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm WARN deprecated source-map-url@0.4.1: See https://github.com/lydell/source-map-url#deprecated
+npm WARN deprecated source-map-resolve@0.5.3: See https://github.com/lydell/source-map-resolve#deprecated
+npm WARN deprecated resolve-url@0.2.1: https://github.com/lydell/resolve-url#deprecated
+npm WARN deprecated sane@2.5.2: some dependency vulnerabilities fixed, support for node < 10 dropped, and newer ECMAScript syntax/features added
+npm WARN deprecated request-promise-native@1.0.9: request-promise-native has been deprecated because it extends the now deprecated request package, see https://github.com/request/request/issues/3142
+npm WARN deprecated querystring@0.2.0: The querystring API is considered Legacy. new code should use the URLSearchParams API instead.
+npm WARN deprecated request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142
+npm WARN deprecated left-pad@1.3.0: use String.prototype.padStart()
+npm WARN deprecated kleur@2.0.2: Please upgrade to kleur@3 or migrate to 'ansi-colors' if you prefer the old syntax. Visit <https://github.com/lukeed/kleur/releases/tag/v3.0.0\> for migration path(s).
+npm WARN deprecated uglify-es@3.3.9: support for ECMAScript is superseded by `uglify-js` as of v3.13.0
+npm WARN deprecated hoek@4.2.1: This version has been deprecated in accordance with the hapi support policy (hapi.im/support). Please upgrade to the latest version to get the best features, bug fixes, and security patches. If you are unable to upgrade at this time, paid support is available for older versions (hapi.im/commercial).
+npm WARN deprecated har-validator@5.1.5: this library is no longer supported
+npm WARN deprecated flatten@1.0.3: flatten is deprecated in favor of utility frameworks such as lodash.
+npm WARN deprecated html-webpack-plugin@4.0.0-alpha.2: please switch to a stable version
+npm WARN deprecated eslint-loader@2.1.1: This loader has been deprecated. Please use eslint-webpack-plugin
+npm WARN deprecated circular-json@0.3.3: CircularJSON is in maintenance only, flatted is its successor.
+npm WARN deprecated chokidar@2.1.8: Chokidar 2 does not receive security updates since 2019. Upgrade to chokidar 3 with 15x fewer dependencies
+npm WARN deprecated joi@11.4.0: This version has been deprecated in accordance with the hapi support policy (hapi.im/support). Please upgrade to the latest version to get the best features, bug fixes, and security patches. If you are unable to upgrade at this time, paid support is available for older versions (hapi.im/commercial).
+npm WARN deprecated svgo@1.3.2: This SVGO version is no longer supported. Upgrade to v2.x.x.
+npm WARN deprecated acorn-dynamic-import@3.0.0: This is probably built in to whatever tool you're using. If you still need it... idk
+npm WARN deprecated babel-eslint@9.0.0: babel-eslint is now @babel/eslint-parser. This package will no longer receive updates.
+npm WARN deprecated core-js@2.6.12: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
+npm WARN deprecated core-js@2.6.4: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
+
+added 1926 packages, and audited 1927 packages in 34s
+
+103 packages are looking for funding
+  run `npm fund` for details
+
+78 vulnerabilities (13 low, 19 moderate, 42 high, 4 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+npm notice 
+npm notice New major version of npm available! 8.19.3 -> 9.6.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v9.6.2
+npm notice Run npm install -g npm@9.6.2 to update!
+npm notice 
+gitpod /workspace/aws-bootcamp-cruddur-2023/frontend-react-js (main) $ 
+
+
+# CREATED DOCKERFILE AT FRONTEND_REACT.JS/DOCKERFILE
+# --------------------------------------------------
+
+FROM node:16.18
+
+ENV PORT=3000
+
+COPY . /frontend-react-js
+WORKDIR /frontend-react-js
+RUN npm install
+EXPOSE ${PORT}
+CMD ["npm", "start"]
+
+# BUILD FRONTEND_REACT.js
+
+gitpod /workspace/aws-bootcamp-cruddur-2023/frontend-react-js (main) $ docker build -t frontend-react-js ./frontend-react-js
+unable to prepare context: path "./frontend-react-js" not found
+gitpod /workspace/aws-bootcamp-cruddur-2023/frontend-react-js (main) $ cd ..
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker build -t frontend-react-js ./frontend-react-js
+Sending build context to Docker daemon  236.1MB
+Step 1/7 : FROM node:16.18
+16.18: Pulling from library/node
+620af4e91dbf: Pull complete 
+fae29f309a72: Pull complete 
+28fca74d99b6: Pull complete 
+0b5db87f5b42: Pull complete 
+fa488706ea13: Pull complete 
+0380b9b3282f: Pull complete 
+383dfecd3687: Pull complete 
+ca59981dc274: Pull complete 
+4fa5c4b55a85: Pull complete 
+Digest: sha256:7f404d09ceb780c51f4fac7592c46b8f21211474aacce25389eb0df06aaa7472
+Status: Downloaded newer image for node:16.18
+ ---> 993a4cf9c1e8
+Step 2/7 : ENV PORT=3000
+ ---> Running in a8e33c2b03a0
+Removing intermediate container a8e33c2b03a0
+ ---> b9274123cd2a
+Step 3/7 : COPY . /frontend-react-js
+ ---> 8a6e1c9eed6b
+Step 4/7 : WORKDIR /frontend-react-js
+ ---> Running in c9751ddb2045
+Removing intermediate container c9751ddb2045
+ ---> 30b3144457ad
+Step 5/7 : RUN npm install
+ ---> Running in 3f0b00545b37
+
+up to date, audited 1927 packages in 7s
+
+103 packages are looking for funding
+  run `npm fund` for details
+
+78 vulnerabilities (13 low, 19 moderate, 42 high, 4 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+npm notice 
+npm notice New major version of npm available! 8.19.2 -> 9.6.2
+npm notice Changelog: <https://github.com/npm/cli/releases/tag/v9.6.2>
+npm notice Run `npm install -g npm@9.6.2` to update!
+npm notice 
+Removing intermediate container 3f0b00545b37
+ ---> 0a53f4e8420d
+Step 6/7 : EXPOSE ${PORT}
+ ---> Running in 5789c9c35e22
+Removing intermediate container 5789c9c35e22
+ ---> c3b74a4c150e
+Step 7/7 : CMD ["npm", "start"]
+ ---> Running in d80d801844a6
+Removing intermediate container d80d801844a6
+ ---> ccce78c61614
+Successfully built ccce78c61614
+Successfully tagged frontend-react-js:latest
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
+
+# RUN FRONTEND_REACT.js
+
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker run -p 3000:3000 -d frontend-react-js^C
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docket images
+bash: docket: command not found
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker images
+REPOSITORY          TAG                IMAGE ID       CREATED              SIZE
+frontend-react-js   latest             ccce78c61614   About a minute ago   1.14GB
+backend-flask       latest             4938dada5ebc   About an hour ago    130MB
+python              3.10-slim-buster   83773ada8884   41 hours ago         118MB
+node                16.18              993a4cf9c1e8   3 months ago         910MB
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker ps
+CONTAINER ID   IMAGE           COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+c3d5e3f91cf4   backend-flask   "python3 -m flask ru…"   27 minutes ago   Up 27 minutes   0.0.0.0:4567->4567/tcp, :::4567->4567/tcp   youthful_sammet
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker run -p 3000:3000 -d frontend-react-js
+b1f6268f1ccbc270086bbcc84eccb07ca64a33ed7149b81a67ca01337ef7d0a8
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
+
+# DOCKER LOG FOR FRONTEND_REACT CONTAINER EXECUTION
+
+ *  Executing task: docker logs --tail 1000 -f f4f539aea4af448df3e99b831a1c5190e9c097d60a39eaf02f5a7f018f401a0b 
+
+
+> frontend@0.1.0 start
+> react-scripts start
+
+(node:44) [DEP0111] DeprecationWarning: Access to process.binding('http_parser') is deprecated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Starting the development server...
+
+Failed to compile.
+
+./src/components/ActivityActionRepost.js
+  Line 10:  'React' must be in scope when using JSX  react/react-in-jsx-scope
+  Line 14:   'React' must be in scope when using JSX  react/react-in-jsx-scope
+  Line 15:   'React' must be in scope when using JSX  react/react-in-jsx-scope
+
+Search for the keywords to learn more about each error.
+
 
 
 
