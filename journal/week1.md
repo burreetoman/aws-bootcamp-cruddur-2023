@@ -1414,10 +1414,220 @@ backend-flask       latest             4938dada5ebc   34 hours ago    130MB
 python              3.10-slim-buster   83773ada8884   3 days ago      118MB
 node                16.18              993a4cf9c1e8   3 months ago    910MB
 gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker ps
-CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS    NAMES
 gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker ps -a
 CONTAINER ID   IMAGE          COMMAND                  CREATED        STATUS                    PORTS     NAMES
 f4f539aea4af   ccce78c61614   "docker-entrypoint.s…"   32 hours ago   Exited (1) 32 hours ago             mystifying_booth
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
+
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker compose up
+[+] Building 29.4s (18/18) FINISHED                                                                                                                                  
+ => [aws-bootcamp-cruddur-2023-backend-flask internal] load build definition from Dockerfile                                                                    0.0s
+ => => transferring dockerfile: 294B                                                                                                                            0.0s
+ => [aws-bootcamp-cruddur-2023-frontend-react-js internal] load build definition from Dockerfile                                                                0.0s
+ => => transferring dockerfile: 176B                                                                                                                            0.0s
+ => [aws-bootcamp-cruddur-2023-backend-flask internal] load .dockerignore                                                                                       0.0s
+ => => transferring context: 2B                                                                                                                                 0.0s
+ => [aws-bootcamp-cruddur-2023-frontend-react-js internal] load .dockerignore                                                                                   0.0s
+ => => transferring context: 2B                                                                                                                                 0.0s
+ => [aws-bootcamp-cruddur-2023-backend-flask internal] load metadata for docker.io/library/python:3.10-slim-buster                                              0.0s
+ => [aws-bootcamp-cruddur-2023-backend-flask 1/5] FROM docker.io/library/python:3.10-slim-buster                                                                0.2s
+ => [aws-bootcamp-cruddur-2023-backend-flask internal] load build context                                                                                       0.0s
+ => => transferring context: 19.78kB                                                                                                                            0.0s
+ => [aws-bootcamp-cruddur-2023-frontend-react-js internal] load metadata for docker.io/library/node:16.18                                                       0.0s
+ => [aws-bootcamp-cruddur-2023-frontend-react-js internal] load build context                                                                                  11.4s
+ => => transferring context: 213.47MB                                                                                                                          11.3s
+ => [aws-bootcamp-cruddur-2023-frontend-react-js 1/4] FROM docker.io/library/node:16.18                                                                         0.5s
+ => [aws-bootcamp-cruddur-2023-backend-flask 2/5] WORKDIR /backend-flask                                                                                        0.2s
+ => [aws-bootcamp-cruddur-2023-backend-flask 3/5] COPY requirements.txt requirements.txt                                                                        0.2s
+ => [aws-bootcamp-cruddur-2023-backend-flask 4/5] RUN pip3 install -r requirements.txt                                                                         10.5s
+ => [aws-bootcamp-cruddur-2023-backend-flask 5/5] COPY . .                                                                                                      0.2s 
+ => [aws-bootcamp-cruddur-2023-frontend-react-js] exporting to image                                                                                            8.5s
+ => => exporting layers                                                                                                                                         7.5s
+ => => writing image sha256:1df98b1ca46e5bcac71d1b97f434f52403663e331a3c8d1b5264969fad9c9799                                                                    0.0s
+ => => naming to docker.io/library/aws-bootcamp-cruddur-2023-backend-flask                                                                                      0.0s
+ => => writing image sha256:c267236c1ef2936db045ba0238573841fdee0a47caec33ef66281db612665ef9                                                                    0.0s
+ => => naming to docker.io/library/aws-bootcamp-cruddur-2023-frontend-react-js                                                                                  0.0s
+ => [aws-bootcamp-cruddur-2023-frontend-react-js 2/4] COPY . /frontend-react-js                                                                                 4.4s
+ => [aws-bootcamp-cruddur-2023-frontend-react-js 3/4] WORKDIR /frontend-react-js                                                                                0.1s
+ => [aws-bootcamp-cruddur-2023-frontend-react-js 4/4] RUN npm install                                                                                           5.7s
+[+] Running 3/1
+ ✔ Network aws-bootcamp-cruddur-2023_default                Created                                                                                             0.0s 
+ ✔ Container aws-bootcamp-cruddur-2023-backend-flask-1      Created                                                                                             0.0s 
+ ✔ Container aws-bootcamp-cruddur-2023-frontend-react-js-1  Created                                                                                             0.0s 
+Attaching to aws-bootcamp-cruddur-2023-backend-flask-1, aws-bootcamp-cruddur-2023-frontend-react-js-1
+aws-bootcamp-cruddur-2023-backend-flask-1      | 'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+aws-bootcamp-cruddur-2023-backend-flask-1      | 'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+aws-bootcamp-cruddur-2023-backend-flask-1      | 'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+aws-bootcamp-cruddur-2023-backend-flask-1      |  * Debug mode: on
+aws-bootcamp-cruddur-2023-backend-flask-1      | WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+aws-bootcamp-cruddur-2023-backend-flask-1      |  * Running on all addresses (0.0.0.0)
+aws-bootcamp-cruddur-2023-backend-flask-1      |  * Running on http://127.0.0.1:4567
+aws-bootcamp-cruddur-2023-backend-flask-1      |  * Running on http://172.18.0.3:4567
+aws-bootcamp-cruddur-2023-backend-flask-1      | Press CTRL+C to quit
+aws-bootcamp-cruddur-2023-backend-flask-1      |  * Restarting with stat
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | > frontend@0.1.0 start
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | > react-scripts start
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-backend-flask-1      | 'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+aws-bootcamp-cruddur-2023-backend-flask-1      | 'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+aws-bootcamp-cruddur-2023-backend-flask-1      | 'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+aws-bootcamp-cruddur-2023-backend-flask-1      |  * Debugger is active!
+aws-bootcamp-cruddur-2023-backend-flask-1      |  * Debugger PIN: 900-683-431
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | (node:44) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | (Use `node --trace-deprecation ...` to show where the warning was created)
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | (node:44) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Starting the development server...
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Compiled with warnings.
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Warning
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | (4:3) autoprefixer: start value has mixed support, consider using flex-start instead
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Warning
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | (3:3) autoprefixer: start value has mixed support, consider using flex-start instead
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Warning
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | (3:3) autoprefixer: start value has mixed support, consider using flex-start instead
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | [eslint] 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/App.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 12:8:  'process' is defined but never used  no-unused-vars
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/components/DesktopNavigationLink.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 18:5:  Expected a default case  default-case
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 21:9:  Unreachable code         no-unreachable
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 24:9:  Unreachable code         no-unreachable
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 27:9:  Unreachable code         no-unreachable
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 30:9:  Unreachable code         no-unreachable
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 33:9:  Unreachable code         no-unreachable
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/components/DesktopSidebar.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 41:9:  The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the element to resemble a link, use a button and change it with appropriate styles. Learn more: https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md  jsx-a11y/anchor-is-valid
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 42:9:  The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the element to resemble a link, use a button and change it with appropriate styles. Learn more: https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md  jsx-a11y/anchor-is-valid
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 43:9:  The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the element to resemble a link, use a button and change it with appropriate styles. Learn more: https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md  jsx-a11y/anchor-is-valid
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/components/MessageGroupItem.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 27:23:  Expected '===' and instead saw '=='  eqeqeq
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/components/ProfileInfo.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 29:16:  Expected '===' and instead saw '=='  eqeqeq
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/components/ReplyForm.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 4:27:  'BombIcon' is defined but never used  no-unused-vars
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/components/TrendItem.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 13:5:  The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the element to resemble a link, use a button and change it with appropriate styles. Learn more: https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md  jsx-a11y/anchor-is-valid
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/pages/ConfirmationPage.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 13:20:  'setCodeSent' is assigned a value but never used                                                                       no-unused-vars
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 67:6:   React Hook React.useEffect has a missing dependency: 'params.email'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/pages/MessageGroupPage.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 16:10:  'popped' is assigned a value but never used                                                                                    no-unused-vars
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 75:6:   React Hook React.useEffect has a missing dependency: 'loadMessageGroupData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/pages/MessageGroupsPage.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 12:10:  'popped' is assigned a value but never used  no-unused-vars
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/pages/RecoverPage.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 12:18:   'setErrors' is assigned a value but never used     no-unused-vars
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 13:21:   'setFormState' is assigned a value but never used  no-unused-vars
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 118:17:  Expected '===' and instead saw '=='                eqeqeq
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 121:22:  Expected '===' and instead saw '=='                eqeqeq
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 124:22:  Expected '===' and instead saw '=='                eqeqeq
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/pages/SignupPage.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 16:18:  'setErrors' is assigned a value but never used  no-unused-vars
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/pages/UserFeedPage.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 57:6:  React Hook React.useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Search for the keywords to learn more about each warning.
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | To ignore, add // eslint-disable-next-line to the line before.
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | WARNING in ./src/components/ActivityContent.css (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[2]!./node_modules/source-map-loader/dist/cjs.js!./src/components/ActivityContent.css)
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Module Warning (from ./node_modules/postcss-loader/dist/cjs.js):
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Warning
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | (4:3) autoprefixer: start value has mixed support, consider using flex-start instead
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | WARNING in ./src/components/MessageGroupItem.css (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[2]!./node_modules/source-map-loader/dist/cjs.js!./src/components/MessageGroupItem.css)
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Module Warning (from ./node_modules/postcss-loader/dist/cjs.js):
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Warning
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | (3:3) autoprefixer: start value has mixed support, consider using flex-start instead
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | WARNING in ./src/components/MessageItem.css (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[2]!./node_modules/source-map-loader/dist/cjs.js!./src/components/MessageItem.css)
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Module Warning (from ./node_modules/postcss-loader/dist/cjs.js):
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Warning
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | (3:3) autoprefixer: start value has mixed support, consider using flex-start instead
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | WARNING in [eslint] 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/App.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 12:8:  'process' is defined but never used  no-unused-vars
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/components/DesktopNavigationLink.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 18:5:  Expected a default case  default-case
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 21:9:  Unreachable code         no-unreachable
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 24:9:  Unreachable code         no-unreachable
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 27:9:  Unreachable code         no-unreachable
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 30:9:  Unreachable code         no-unreachable
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 33:9:  Unreachable code         no-unreachable
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/components/DesktopSidebar.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 41:9:  The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the element to resemble a link, use a button and change it with appropriate styles. Learn more: https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md  jsx-a11y/anchor-is-valid
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 42:9:  The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the element to resemble a link, use a button and change it with appropriate styles. Learn more: https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md  jsx-a11y/anchor-is-valid
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 43:9:  The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the element to resemble a link, use a button and change it with appropriate styles. Learn more: https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md  jsx-a11y/anchor-is-valid
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/components/MessageGroupItem.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 27:23:  Expected '===' and instead saw '=='  eqeqeq
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/components/ProfileInfo.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 29:16:  Expected '===' and instead saw '=='  eqeqeq
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/components/ReplyForm.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 4:27:  'BombIcon' is defined but never used  no-unused-vars
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/components/TrendItem.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 13:5:  The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the element to resemble a link, use a button and change it with appropriate styles. Learn more: https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md  jsx-a11y/anchor-is-valid
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/pages/ConfirmationPage.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 13:20:  'setCodeSent' is assigned a value but never used                                                                       no-unused-vars
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 67:6:   React Hook React.useEffect has a missing dependency: 'params.email'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/pages/MessageGroupPage.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 16:10:  'popped' is assigned a value but never used                                                                                    no-unused-vars
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 75:6:   React Hook React.useEffect has a missing dependency: 'loadMessageGroupData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/pages/MessageGroupsPage.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 12:10:  'popped' is assigned a value but never used  no-unused-vars
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/pages/RecoverPage.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 12:18:   'setErrors' is assigned a value but never used     no-unused-vars
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 13:21:   'setFormState' is assigned a value but never used  no-unused-vars
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 118:17:  Expected '===' and instead saw '=='                eqeqeq
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 121:22:  Expected '===' and instead saw '=='                eqeqeq
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 124:22:  Expected '===' and instead saw '=='                eqeqeq
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/pages/SignupPage.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 16:18:  'setErrors' is assigned a value but never used  no-unused-vars
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | src/pages/UserFeedPage.js
+aws-bootcamp-cruddur-2023-frontend-react-js-1  |   Line 57:6:  React Hook React.useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | webpack compiled with 4 warnings
+aws-bootcamp-cruddur-2023-backend-flask-1      | 192.168.105.142 - - [20/Mar/2023 04:13:28] "GET / HTTP/1.1" 404 -
+aws-bootcamp-cruddur-2023-backend-flask-1      | 192.168.105.142 - - [20/Mar/2023 04:13:57] "GET /api/activities/home HTTP/1.1" 200 -
+aws-bootcamp-cruddur-2023-backend-flask-1      | 192.168.105.142 - - [20/Mar/2023 04:14:20] "GET /api/activities/home HTTP/1.1" 200 -
+^CGracefully stopping... (press Ctrl+C again to force)
+Aborting on container exit...
+[+] Running 2/2
+ ✔ Container aws-bootcamp-cruddur-2023-backend-flask-1      Stopped                                                                                             0.3s 
+ ✔ Container aws-bootcamp-cruddur-2023-frontend-react-js-1  Stopped                                                                                             0.8s 
+canceled
 gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
 
 
