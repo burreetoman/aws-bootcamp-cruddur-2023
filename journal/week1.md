@@ -1283,10 +1283,142 @@ Failed to compile.
 
 Search for the keywords to learn more about each error.
 
+# frontend-react/package.json
+#   Errors during frontend container execution were caused by modification of react-scripts version
+#   to ^2.1.3 from the original value of 5.0.1 (possibly caused by execution of "npm install" when
+#   creating node_modules).  react-scripts version reverted to "5.0.1" (as in omenking's original
+#   version).
+
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "js-cookie": "^3.0.1",
+    "luxon": "^3.1.0",
+    "process": "^0.11.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.3",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
+
+# NEW RUN OF [NPM INSTALL] AFTER FIX
+# ----------------------------------
+
+gitpod /workspace/aws-bootcamp-cruddur-2023/frontend-react-js (main) $ npm i
+npm WARN deprecated rollup-plugin-terser@7.0.2: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-terser
+npm WARN deprecated sourcemap-codec@1.4.8: Please use @jridgewell/sourcemap-codec instead
+
+added 576 packages, removed 1014 packages, changed 351 packages, and audited 1489 packages in 29s
+
+230 packages are looking for funding
+  run `npm fund` for details
+
+6 high severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+npm notice 
+npm notice New major version of npm available! 8.19.3 -> 9.6.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v9.6.2
+npm notice Run npm install -g npm@9.6.2 to update!
+npm notice 
+gitpod /workspace/aws-bootcamp-cruddur-2023/frontend-react-js (main) $ 
 
 
+# BUILD FRONTEND-REACT 
 
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker build -t frontend-react-js ./frontend-react-js
+Sending build context to Docker daemon  242.1MB
+Step 1/7 : FROM node:16.18
+ ---> 993a4cf9c1e8
+Step 2/7 : ENV PORT=3000
+ ---> Using cache
+ ---> b9274123cd2a
+Step 3/7 : COPY . /frontend-react-js
+ ---> 7ad4d1e95eea
+Step 4/7 : WORKDIR /frontend-react-js
+ ---> Running in 47bceaf57435
+Removing intermediate container 47bceaf57435
+ ---> 2846c3d7a9b6
+Step 5/7 : RUN npm install
+ ---> Running in 988b5f32168a
 
+changed 1 package, and audited 1489 packages in 5s
+
+230 packages are looking for funding
+  run `npm fund` for details
+
+6 high severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+npm notice 
+npm notice New major version of npm available! 8.19.2 -> 9.6.2
+npm notice Changelog: <https://github.com/npm/cli/releases/tag/v9.6.2>
+npm notice Run `npm install -g npm@9.6.2` to update!
+npm notice 
+Removing intermediate container 988b5f32168a
+ ---> 55ee406f3a38
+Step 6/7 : EXPOSE ${PORT}
+ ---> Running in fc03ed0f5edb
+Removing intermediate container fc03ed0f5edb
+ ---> ab3b96b54b5b
+Step 7/7 : CMD ["npm", "start"]
+ ---> Running in 059dd841e40e
+Removing intermediate container 059dd841e40e
+ ---> 04f9c7671cf1
+Successfully built 04f9c7671cf1
+Successfully tagged frontend-react-js:latest
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
+
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker images
+REPOSITORY          TAG                IMAGE ID       CREATED         SIZE
+frontend-react-js   latest             04f9c7671cf1   2 minutes ago   1.21GB
+<none>              <none>             ccce78c61614   32 hours ago    1.14GB
+backend-flask       latest             4938dada5ebc   34 hours ago    130MB
+python              3.10-slim-buster   83773ada8884   3 days ago      118MB
+node                16.18              993a4cf9c1e8   3 months ago    910MB
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED        STATUS                    PORTS     NAMES
+f4f539aea4af   ccce78c61614   "docker-entrypoint.s…"   32 hours ago   Exited (1) 32 hours ago             mystifying_booth
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
 
 
 
