@@ -1630,7 +1630,143 @@ Aborting on container exit...
 canceled
 gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
 
+# ==========================================
+# DYNAMODB DOCUMENTATION FROM 100DaysOfCloud
+# ==========================================
+
+Run Docker Local
+
+docker-compose up
+
+Create a table
+
+aws dynamodb create-table \
+    --endpoint-url http://localhost:8000 \
+    --table-name Music \
+    --attribute-definitions \
+        AttributeName=Artist,AttributeType=S \
+        AttributeName=SongTitle,AttributeType=S \
+    --key-schema AttributeName=Artist,KeyType=HASH AttributeName=SongTitle,KeyType=RANGE \
+    --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 \
+    --table-class STANDARD
+
+Create an Item
+
+aws dynamodb put-item \
+    --endpoint-url http://localhost:8000 \
+    --table-name Music \
+    --item \
+        '{"Artist": {"S": "No One You Know"}, "SongTitle": {"S": "Call Me Today"}, "AlbumTitle": {"S": "Somewhat Famous"}}' \
+    --return-consumed-capacity TOTAL  
+
+List Tables
+
+aws dynamodb list-tables --endpoint-url http://localhost:8000
+
+Get Records
+
+aws dynamodb scan --table-name cruddur_cruds --query "Items" --endpoint-url http://localhost:8000
+
+References
+
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tools.CLI.html
+
+NOTE: Table name was screwed up.  List table command shows "cruddur cruds" for the name but it is actually named "Music".
+
+# =============================
+# POSTGRESS CLIENT INSTALLATION
+# =============================
+
+- name: postgres
+    init: |
+      curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
+      echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |sudo tee  /etc/apt/sources.list.d/pgdg.list
+      sudo apt update
+      sudo apt install -y postgresql-client-13 libpq-dev
+
+# ==========================================================
+# DYNAMODB AND POSTGRESS INTEGRATED INTO DOCKER COMPOSE FILE
+# ==========================================================
+
+version: "3.8"
+# ------------------------------------------------
+services:
+  backend-flask:
+    environment:
+      FRONTEND_URL: "https://3000-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
+      BACKEND_URL: "https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
+    build: ./backend-flask
+    ports:
+      - "4567:4567"
+    volumes:
+      - ./backend-flask:/backend-flask
+  frontend-react-js:
+    environment:
+      REACT_APP_BACKEND_URL: "https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
+    build: ./frontend-react-js
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend-react-js:/frontend-react-js
+  dynamodb-local:
+    # https://stackoverflow.com/questions/67533058/persist-local-dynamodb-data-in-volumes-lack-permission-unable-to-open-databa
+    # We needed to add user:root to get this working.
+    user: root
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
+    image: "amazon/dynamodb-local:latest"
+    container_name: dynamodb-local
+    ports:
+      - "8000:8000"
+    volumes:
+      - "./docker/dynamodb:/home/dynamodblocal/data"
+    working_dir: /home/dynamodblocal
+  db:
+    image: postgres:13-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - '5432:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
+# ------------------------------------------------
+volumes:
+  db:
+    driver: local
+# ------------------------------------------------
+# the name flag is a hack to change the default prepend folder
+# name when outputting the image names
+networks: 
+  internal-network:
+    driver: bridge
+    name: cruddur
+
+# ==========================================================
+# POSTGRESS CLIENT STARTUP INTEGRATED INTO GITPOD.YML
+# ==========================================================
+
+tasks:
+  - name: aws-cli
+    env:
+      AWS_CLI_AUTO_PROMPT: on-partial
+    init: |
+      cd /workspace
+      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      unzip awscliv2.zip
+      sudo ./aws/install
+      cd $THEIA_WORKSPACE_ROOT
+  - name: postgres
+    init: |
+      curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
+      echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |sudo tee  /etc/apt/sources.list.d/pgdg.list
+      sudo apt update
+      sudo apt install -y postgresql-client-13 libpq-dev
+vscode:
+  extensions:
+    - 42Crunch.vscode-openapi
+    - ms-azuretools.vscode-docker
 
 
-
-
+    
+      
