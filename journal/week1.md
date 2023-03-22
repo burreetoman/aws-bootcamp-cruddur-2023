@@ -1767,6 +1767,181 @@ vscode:
     - 42Crunch.vscode-openapi
     - ms-azuretools.vscode-docker
 
-# END OF FILE
+# ========================================================
+# RUNNING DOCKER COMPPOSE UP TO TEST EXECUTION OF DYNAMODB
+# ========================================================
 
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker compose up
+[+] Running 14/14
+ ✔ dynamodb-local 4 layers [⣿⣿⣿⣿]      0B/0B      Pulled                                                                                                 14.7s 
+   ✔ 1e78b99dd1fd Pull complete                                                                                                                           6.0s 
+   ✔ 6aabd9041a5c Pull complete                                                                                                                          12.3s 
+   ✔ 4f4fb700ef54 Pull complete                                                                                                                          12.4s 
+   ✔ 601cf5909367 Pull complete                                                                                                                          13.5s 
+ ✔ db 8 layers [⣿⣿⣿⣿⣿⣿⣿⣿]      0B/0B      Pulled                                                                                                         13.4s 
+   ✔ 63b65145d645 Pull complete                                                                                                                           1.5s 
+   ✔ c441836541d9 Pull complete                                                                                                                           2.5s 
+   ✔ d49de1a24361 Pull complete                                                                                                                           3.0s 
+   ✔ 6c609d08dc3c Pull complete                                                                                                                          11.3s 
+   ✔ e801cecfb07c Pull complete                                                                                                                          11.8s 
+   ✔ 98756d431840 Pull complete                                                                                                                          11.9s 
+   ✔ d991736c9c5a Pull complete                                                                                                                          12.0s 
+   ✔ c708ebe2e647 Pull complete                                                                                                                          12.1s 
+[+] Running 5/1
+ ✔ Volume "aws-bootcamp-cruddur-2023_db"                    Created                                                                                       0.0s 
+ ✔ Container dynamodb-local                                 Created                                                                                       0.0s 
+ ✔ Container aws-bootcamp-cruddur-2023-db-1                 Created                                                                                       0.0s 
+ ✔ Container aws-bootcamp-cruddur-2023-backend-flask-1      Created                                                                                       0.0s 
+ ✔ Container aws-bootcamp-cruddur-2023-frontend-react-js-1  Created                                                                                       0.0s 
+Attaching to aws-bootcamp-cruddur-2023-backend-flask-1, aws-bootcamp-cruddur-2023-db-1, aws-bootcamp-cruddur-2023-frontend-react-js-1, dynamodb-local
+aws-bootcamp-cruddur-2023-db-1                 | The files belonging to this database system will be owned by user "postgres".
+aws-bootcamp-cruddur-2023-db-1                 | This user must also own the server process.
+aws-bootcamp-cruddur-2023-db-1                 | 
+aws-bootcamp-cruddur-2023-db-1                 | The database cluster will be initialized with locale "en_US.utf8".
+aws-bootcamp-cruddur-2023-db-1                 | The default database encoding has accordingly been set to "UTF8".
+aws-bootcamp-cruddur-2023-db-1                 | The default text search configuration will be set to "english".
+aws-bootcamp-cruddur-2023-db-1                 | 
+aws-bootcamp-cruddur-2023-db-1                 | Data page checksums are disabled.
+aws-bootcamp-cruddur-2023-db-1                 | 
+aws-bootcamp-cruddur-2023-db-1                 | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+aws-bootcamp-cruddur-2023-db-1                 | creating subdirectories ... ok
+aws-bootcamp-cruddur-2023-db-1                 | selecting dynamic shared memory implementation ... posix
+aws-bootcamp-cruddur-2023-db-1                 | selecting default max_connections ... 100
+aws-bootcamp-cruddur-2023-db-1                 | selecting default shared_buffers ... 128MB
+aws-bootcamp-cruddur-2023-db-1                 | selecting default time zone ... UTC
+aws-bootcamp-cruddur-2023-db-1                 | creating configuration files ... ok
+dynamodb-local                                 | Initializing DynamoDB Local with the following configuration:
+dynamodb-local                                 | Port:  8000
+dynamodb-local                                 | InMemory:      false
+dynamodb-local                                 | DbPath:        ./data
+dynamodb-local                                 | SharedDb:      true
+dynamodb-local                                 | shouldDelayTransientStatuses:  false
+dynamodb-local                                 | CorsParams:    null
+dynamodb-local                                 | 
+aws-bootcamp-cruddur-2023-backend-flask-1      | 'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+aws-bootcamp-cruddur-2023-backend-flask-1      | 'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+aws-bootcamp-cruddur-2023-backend-flask-1      | 'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+aws-bootcamp-cruddur-2023-backend-flask-1      |  * Debug mode: on
+aws-bootcamp-cruddur-2023-backend-flask-1      | WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+aws-bootcamp-cruddur-2023-backend-flask-1      |  * Running on all addresses (0.0.0.0)
+aws-bootcamp-cruddur-2023-backend-flask-1      |  * Running on http://127.0.0.1:4567
+aws-bootcamp-cruddur-2023-backend-flask-1      |  * Running on http://172.18.0.5:4567
+aws-bootcamp-cruddur-2023-backend-flask-1      | Press CTRL+C to quit
+aws-bootcamp-cruddur-2023-backend-flask-1      |  * Restarting with stat
+aws-bootcamp-cruddur-2023-db-1                 | running bootstrap script ... ok
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | > frontend@0.1.0 start
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | > react-scripts start
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-backend-flask-1      | 'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+aws-bootcamp-cruddur-2023-backend-flask-1      | 'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+aws-bootcamp-cruddur-2023-backend-flask-1      | 'FLASK_ENV' is deprecated and will not be used in Flask 2.3. Use 'FLASK_DEBUG' instead.
+aws-bootcamp-cruddur-2023-db-1                 | sh: locale: not found
+aws-bootcamp-cruddur-2023-db-1                 | 2023-03-22 02:35:28.176 UTC [49] WARNING:  no usable system locales were found
+aws-bootcamp-cruddur-2023-backend-flask-1      |  * Debugger is active!
+aws-bootcamp-cruddur-2023-backend-flask-1      |  * Debugger PIN: 457-408-086
+aws-bootcamp-cruddur-2023-db-1                 | performing post-bootstrap initialization ... ok
+aws-bootcamp-cruddur-2023-db-1                 | initdb: warning: enabling "trust" authentication for local connections
+aws-bootcamp-cruddur-2023-db-1                 | You can change this by editing pg_hba.conf or using the option -A, or
+aws-bootcamp-cruddur-2023-db-1                 | --auth-local and --auth-host, the next time you run initdb.
+aws-bootcamp-cruddur-2023-db-1                 | syncing data to disk ... ok
+aws-bootcamp-cruddur-2023-db-1                 | 
+aws-bootcamp-cruddur-2023-db-1                 | 
+aws-bootcamp-cruddur-2023-db-1                 | Success. You can now start the database server using:
+aws-bootcamp-cruddur-2023-db-1                 | 
+aws-bootcamp-cruddur-2023-db-1                 |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+aws-bootcamp-cruddur-2023-db-1                 | 
+aws-bootcamp-cruddur-2023-db-1                 | waiting for server to start....2023-03-22 02:35:29.122 UTC [55] LOG:  starting PostgreSQL 13.10 on x86_64-pc-linux-musl, compiled by gcc (Alpine 12.2.1_git20220924-r4) 12.2.1 20220924, 64-bit
+aws-bootcamp-cruddur-2023-db-1                 | 2023-03-22 02:35:29.124 UTC [55] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+aws-bootcamp-cruddur-2023-db-1                 | 2023-03-22 02:35:29.126 UTC [56] LOG:  database system was shut down at 2023-03-22 02:35:28 UTC
+aws-bootcamp-cruddur-2023-db-1                 | 2023-03-22 02:35:29.130 UTC [55] LOG:  database system is ready to accept connections
+aws-bootcamp-cruddur-2023-db-1                 |  done
+aws-bootcamp-cruddur-2023-db-1                 | server started
+aws-bootcamp-cruddur-2023-db-1                 | 
+aws-bootcamp-cruddur-2023-db-1                 | /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+aws-bootcamp-cruddur-2023-db-1                 | 
+aws-bootcamp-cruddur-2023-db-1                 | waiting for server to shut down....2023-03-22 02:35:29.224 UTC [55] LOG:  received fast shutdown request
+aws-bootcamp-cruddur-2023-db-1                 | 2023-03-22 02:35:29.225 UTC [55] LOG:  aborting any active transactions
+aws-bootcamp-cruddur-2023-db-1                 | 2023-03-22 02:35:29.226 UTC [55] LOG:  background worker "logical replication launcher" (PID 62) exited with exit code 1
+aws-bootcamp-cruddur-2023-db-1                 | 2023-03-22 02:35:29.226 UTC [57] LOG:  shutting down
+aws-bootcamp-cruddur-2023-db-1                 | 2023-03-22 02:35:29.235 UTC [55] LOG:  database system is shut down
+aws-bootcamp-cruddur-2023-db-1                 |  done
+aws-bootcamp-cruddur-2023-db-1                 | server stopped
+aws-bootcamp-cruddur-2023-db-1                 | 
+aws-bootcamp-cruddur-2023-db-1                 | PostgreSQL init process complete; ready for start up.
+aws-bootcamp-cruddur-2023-db-1                 | 
+aws-bootcamp-cruddur-2023-db-1                 | 2023-03-22 02:35:29.342 UTC [1] LOG:  starting PostgreSQL 13.10 on x86_64-pc-linux-musl, compiled by gcc (Alpine 12.2.1_git20220924-r4) 12.2.1 20220924, 64-bit
+aws-bootcamp-cruddur-2023-db-1                 | 2023-03-22 02:35:29.342 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+aws-bootcamp-cruddur-2023-db-1                 | 2023-03-22 02:35:29.342 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+aws-bootcamp-cruddur-2023-db-1                 | 2023-03-22 02:35:29.344 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+aws-bootcamp-cruddur-2023-db-1                 | 2023-03-22 02:35:29.348 UTC [68] LOG:  database system was shut down at 2023-03-22 02:35:29 UTC
+aws-bootcamp-cruddur-2023-db-1                 | 2023-03-22 02:35:29.351 UTC [1] LOG:  database system is ready to accept connections
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | (node:44) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | (Use `node --trace-deprecation ...` to show where the warning was created)
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | (node:44) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Starting the development server...
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Compiled with warnings.
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Warning
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | (4:3) autoprefixer: start value has mixed support, consider using flex-start instead
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Warning
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | (3:3) autoprefixer: start value has mixed support, consider using flex-start instead
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Warning
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | (3:3) autoprefixer: start value has mixed support, consider using flex-start instead
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Search for the keywords to learn more about each warning.
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | To ignore, add // eslint-disable-next-line to the line before.
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | WARNING in ./src/components/ActivityContent.css (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[2]!./node_modules/source-map-loader/dist/cjs.js!./src/components/ActivityContent.css)
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Module Warning (from ./node_modules/postcss-loader/dist/cjs.js):
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Warning
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | (4:3) autoprefixer: start value has mixed support, consider using flex-start instead
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | WARNING in ./src/components/MessageGroupItem.css (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[2]!./node_modules/source-map-loader/dist/cjs.js!./src/components/MessageGroupItem.css)
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Module Warning (from ./node_modules/postcss-loader/dist/cjs.js):
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Warning
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | (3:3) autoprefixer: start value has mixed support, consider using flex-start instead
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | WARNING in ./src/components/MessageItem.css (./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].oneOf[5].use[2]!./node_modules/source-map-loader/dist/cjs.js!./src/components/MessageItem.css)
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Module Warning (from ./node_modules/postcss-loader/dist/cjs.js):
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | Warning
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | (3:3) autoprefixer: start value has mixed support, consider using flex-start instead
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | 
+aws-bootcamp-cruddur-2023-frontend-react-js-1  | webpack compiled with 3 warnings
+
+^CGracefully stopping... (press Ctrl+C again to force)
+Aborting on container exit...
+[+] Running 4/4
+ ✔ Container aws-bootcamp-cruddur-2023-backend-flask-1      Stopped                                                                                       0.4s 
+ ✔ Container dynamodb-local                                 Stopped                                                                                       0.6s 
+ ✔ Container aws-bootcamp-cruddur-2023-db-1                 Stopped                                                                                       0.3s 
+ ✔ Container aws-bootcamp-cruddur-2023-frontend-react-js-1  Stopped                                                                                       0.8s 
+canceled
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ===========
+# END OF FILE
+# ===========
       
