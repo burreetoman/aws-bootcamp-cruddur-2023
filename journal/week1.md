@@ -1768,7 +1768,7 @@ vscode:
     - ms-azuretools.vscode-docker
 
 # ========================================================
-# RUNNING DOCKER COMPPOSE UP TO TEST EXECUTION OF DYNAMODB
+# RUNNING DOCKER COMPOSE UP TO TEST EXECUTION OF DYNAMODB
 # ========================================================
 
 gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker compose up
@@ -1925,21 +1925,332 @@ Aborting on container exit...
 canceled
 gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
 
+# =====================================================
+# TESTING ACCESS TO DYNAMODB
+# =====================================================
+
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ aws
+
+usage: aws [options] <command> <subcommand> [<subcommand> ...] [parameters]
+To see help text, you can run:
+
+  aws help
+  aws <command> help
+  aws <command> <subcommand> help
+
+aws: error: the following arguments are required: command
+
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ aws dynamodb create-table \
+>     --endpoint-url http://localhost:8000 \
+>     --table-name Music \
+>     --attribute-definitions \
+>         AttributeName=Artist,AttributeType=S \
+>         AttributeName=SongTitle,AttributeType=S \
+>     --key-schema AttributeName=Artist,KeyType=HASH AttributeName=SongTitle,KeyType=RANGE \
+>     --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 \
+>     --table-class STANDARD
+{
+    "TableDescription": {
+        "AttributeDefinitions": [
+            {
+                "AttributeName": "Artist",
+                "AttributeType": "S"
+            },
+            {
+                "AttributeName": "SongTitle",
+                "AttributeType": "S"
+            }
+        ],
+        "TableName": "Music",
+        "KeySchema": [
+            {
+                "AttributeName": "Artist",
+                "KeyType": "HASH"
+            },
+            {
+                "AttributeName": "SongTitle",
+                "KeyType": "RANGE"
+            }
+        ],
+        "TableStatus": "ACTIVE",
+        "CreationDateTime": "2023-03-22T03:42:36.723000+00:00",
+        "ProvisionedThroughput": {
+            "LastIncreaseDateTime": "1970-01-01T00:00:00+00:00",
+            "LastDecreaseDateTime": "1970-01-01T00:00:00+00:00",
+            "NumberOfDecreasesToday": 0,
+            "ReadCapacityUnits": 1,
+            "WriteCapacityUnits": 1
+        },
+        "TableSizeBytes": 0,
+        "ItemCount": 0,
+        "TableArn": "arn:aws:dynamodb:ddblocal:000000000000:table/Music"
+    }
+}
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ port
+bash: port: command not found
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ ports
+bash: ports: command not found
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ gp ports
+Interact with workspace ports.
+
+Usage:
+  gp ports [command]
+
+Available Commands:
+  await       Waits for a process to listen on a port
+  expose      Makes a port available on 0.0.0.0 so that it can be exposed to the internet
+  list        Lists the workspace ports and their states.
+  visibility  Make a port public or private
+
+Flags:
+  -h, --help   help for ports
+
+Use "gp ports [command] --help" for more information about a command.
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ gp ports list
+| PORT |     STATUS     |                                URL                                 | NAME & DESCRIPTION |
+|------|----------------|--------------------------------------------------------------------|--------------------|
+| 3000 | not served     | https://3000-burreetoman-awsbootcamp-7rz5zznc8ob.ws-us90.gitpod.io |                    |
+| 4567 | open (private) | https://4567-burreetoman-awsbootcamp-7rz5zznc8ob.ws-us90.gitpod.io |                    |
+| 5432 | open (private) | https://5432-burreetoman-awsbootcamp-7rz5zznc8ob.ws-us90.gitpod.io |                    |
+| 8000 | open (private) | https://8000-burreetoman-awsbootcamp-7rz5zznc8ob.ws-us90.gitpod.io |                    |
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ gp ports visi
+Interact with workspace ports.
+
+Usage:
+  gp ports [command]
+
+Available Commands:
+  await       Waits for a process to listen on a port
+  expose      Makes a port available on 0.0.0.0 so that it can be exposed to the internet
+  list        Lists the workspace ports and their states.
+  visibility  Make a port public or private
+
+Flags:
+  -h, --help   help for ports
+
+Use "gp ports [command] --help" for more information about a command.
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ gp ports visibility
+Usage:
+  gp ports visibility <port:{private|public}> [flags]
+
+Flags:
+  -h, --help   help for visibility
+
+accepts 1 arg(s), received 0
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ aws dynamodb put-item \
+>     --endpoint-url http://localhost:8000 \
+>     --table-name Music \
+>     --item \
+>         '{"Artist": {"S": "No One You Know"}, "SongTitle": {"S": "Call Me Today"}, "AlbumTitle": {"S": "Somewhat Famous"}}' \
+>     --return-consumed-capacity TOTAL 
+{
+    "ConsumedCapacity": {
+        "TableName": "Music",
+        "CapacityUnits": 1.0
+    }
+}
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ aws dynamodb list-tables --endpoint-url http://localhost:8000
+{
+    "TableNames": [
+        "Music"
+    ]
+}
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ aws dynamodb scan --table-name cruddur_cruds --query "Items" --endpoint-url http://localhost:8000
+
+An error occurred (ResourceNotFoundException) when calling the Scan operation: Cannot do operations on a non-existent table
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ aws dynamodb scan --table-name Music --query "Items" --endpoint-url http://localhost:8000
+[
+    {
+        "Artist": {
+            "S": "No One You Know"
+        },
+        "SongTitle": {
+            "S": "Call Me Today"
+        },
+        "AlbumTitle": {
+            "S": "Somewhat Famous"
+        }
+    }
+]
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
+
+# =========================================================
+# POSTGRES PARAGRAPH ADDED TO .GITPOD.YML
+# =========================================================
+
+tasks:
+  - name: aws-cli
+    env:
+      AWS_CLI_AUTO_PROMPT: on-partial
+    init: |
+      cd /workspace
+      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      unzip awscliv2.zip
+      sudo ./aws/install
+      cd $THEIA_WORKSPACE_ROOT
+  - name: postgres
+    init: |
+      curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
+      echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |sudo tee  /etc/apt/sources.list.d/pgdg.list
+      sudo apt update
+      sudo apt install -y postgresql-client-13 libpq-dev
+vscode:
+  extensions:
+    - 42Crunch.vscode-openapi
+    - ms-azuretools.vscode-docker
+
+# ================================================
+# POSTGRES .gitpod.yml PARAGRAPH EXECUTED MANUALLY
+# ================================================
+
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
+File '/etc/apt/trusted.gpg.d/postgresql.gpg' exists. Overwrite? (y/N) y
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |sudo tee  /etc/apt/sources.list.d/pgdg.lis
+deb http://apt.postgresql.org/pub/repos/apt/ focal-pgdg main
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ sudo apt update
+Hit:2 https://download.docker.com/linux/ubuntu focal InRelease                                                                                                
+Hit:1 https://apt.llvm.org/focal llvm-toolchain-focal-15 InRelease                                                                                            
+Hit:3 http://archive.ubuntu.com/ubuntu focal InRelease                                                                                                
+Hit:4 http://archive.ubuntu.com/ubuntu focal-updates InRelease                                                                  
+Hit:5 http://archive.ubuntu.com/ubuntu focal-backports InRelease                                                        
+Hit:6 http://security.ubuntu.com/ubuntu focal-security InRelease                                  
+Hit:7 http://ppa.launchpad.net/git-core/ppa/ubuntu focal InRelease                                
+Hit:8 http://apt.postgresql.org/pub/repos/apt focal-pgdg InRelease                                       
+Hit:9 http://ppa.launchpad.net/ondrej/apache2/ubuntu focal InRelease
+Hit:10 http://ppa.launchpad.net/ondrej/nginx-mainline/ubuntu focal InRelease
+Hit:11 http://ppa.launchpad.net/ondrej/php/ubuntu focal InRelease
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+136 packages can be upgraded. Run 'apt list --upgradable' to see them.
+N: Ignoring file 'pgdg.lis' in directory '/etc/apt/sources.list.d/' as it has an invalid filename extension
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ sudo apt install -y postgresql-client-13 libpq-dev
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+libpq-dev is already the newest version (15.2-1.pgdg20.04+1).
+postgresql-client-13 is already the newest version (13.10-1.pgdg20.04+1).
+0 upgraded, 0 newly installed, 0 to remove and 136 not upgraded.
+N: Ignoring file 'pgdg.lis' in directory '/etc/apt/sources.list.d/' as it has an invalid filename extension
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ ls -l /etc/apt/source.list.d/
+ls: cannot access '/etc/apt/source.list.d/': No such file or directory
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ sudo ls -l /etc/apt/
+total 12
+drwxr-xr-x 1 root root   26 Sep  2  2022 apt.conf.d
+drwxr-xr-x 2 root root    6 Apr  9  2020 auth.conf.d
+drwxr-xr-x 2 root root    6 Apr  9  2020 preferences.d
+-rw-r--r-- 1 root root 2743 Oct 30 17:08 sources.list
+drwxr-xr-x 1 root root   39 Mar 22 04:08 sources.list.d
+-rw-r--r-- 1 root root 2743 Oct 30 17:08 sources.list.save
+-rw-r--r-- 1 root root 2288 Oct 17 19:50 trusted.gpg
+drwxr-xr-x 1 root root   28 Mar 22 03:29 trusted.gpg.d
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ sudo -i
+root@burreetoman-awsbootcamp-7rz5zznc8ob:~# ls -l /etc/apt/source.list.d/
+ls: cannot access '/etc/apt/source.list.d/': No such file or directory
+root@burreetoman-awsbootcamp-7rz5zznc8ob:~#
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++ NOTE:It appears that the file is incorrectly referenced.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+The files is named "sources" not "source".
+
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ psql
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+        Is the server running locally and accepting connections on that socket?
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ gp ports list
+| PORT |     STATUS     |                                URL                                 | NAME & DESCRIPTION |
+|------|----------------|--------------------------------------------------------------------|--------------------|
+| 3000 | not served     | https://3000-burreetoman-awsbootcamp-7rz5zznc8ob.ws-us90.gitpod.io |                    |
+| 4567 | open (private) | https://4567-burreetoman-awsbootcamp-7rz5zznc8ob.ws-us90.gitpod.io |                    |
+| 5432 | open (private) | https://5432-burreetoman-awsbootcamp-7rz5zznc8ob.ws-us90.gitpod.io |                    |
+| 8000 | open (private) | https://8000-burreetoman-awsbootcamp-7rz5zznc8ob.ws-us90.gitpod.io |                    |
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
 
 
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ docker compose down
+[+] Running 5/5
+ ✔ Container dynamodb-local                                 Removed                                                                                       0.7s 
+ ✔ Container aws-bootcamp-cruddur-2023-backend-flask-1      Removed                                                                                       0.5s 
+ ✔ Container aws-bootcamp-cruddur-2023-db-1                 Removed                                                                                       0.4s 
+ ✔ Container aws-bootcamp-cruddur-2023-frontend-react-js-1  Removed                                                                                       0.0s 
+ ✔ Network aws-bootcamp-cruddur-2023_default                Removed                                                                                       0.2s 
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
 
+# ============================
+# SHUTTING DOWN DYNAMODB LOCAL
+# ============================
 
+aws-bootcamp-cruddur-2023-db-1                 | 2023-03-22 04:23:30.943 UTC [1] LOG:  received fast shutdown request
+aws-bootcamp-cruddur-2023-db-1                 | 2023-03-22 04:23:30.944 UTC [1] LOG:  aborting any active transactions
+aws-bootcamp-cruddur-2023-db-1                 | 2023-03-22 04:23:30.946 UTC [1] LOG:  background worker "logical replication launcher" (PID 73) exited with exit code 1
+aws-bootcamp-cruddur-2023-db-1                 | 2023-03-22 04:23:30.946 UTC [68] LOG:  shutting down
+aws-bootcamp-cruddur-2023-db-1                 | 2023-03-22 04:23:30.959 UTC [1] LOG:  database system is shut down
+aws-bootcamp-cruddur-2023-db-1 exited with code 0
+aws-bootcamp-cruddur-2023-backend-flask-1 exited with code 0
+Error response from daemon: No such container: 1d239943dba798121da6f782c7828a3b1ed602b6be559afada950d30ac5e767d
+gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
 
+# ================================================
+# GETTING RID OF UNTRACKED ITEMS USING 'GIT CLEAN'
+# ================================================
 
+root@burreetoman-awsbootcamp-7rz5zznc8ob:~# ls -l /workspace/aws-bootcamp-cruddur-2023/docker/
+total 0
+drwxr-xr-x 2 root root 38 Mar 22 03:50 dynamodb
+root@burreetoman-awsbootcamp-7rz5zznc8ob:~# ls -l /workspace/aws-bootcamp-cruddur-2023/docker/dynamodb
+total 16
+-rw-r--r-- 1 root root 16384 Mar 22 03:50 shared-local-instance.db
+root@burreetoman-awsbootcamp-7rz5zznc8ob:~# git clean -d -n /workspace/aws-bootcamp-cruddur-2023/docker
+fatal: not a git repository (or any of the parent directories): .git
+root@burreetoman-awsbootcamp-7rz5zznc8ob:~# git clean -d -n
+fatal: not a git repository (or any of the parent directories): .git
+root@burreetoman-awsbootcamp-7rz5zznc8ob:~# git clean -d -n^Cworkspace/aws-bootcamp-cruddur-2023/
+root@burreetoman-awsbootcamp-7rz5zznc8ob:~# ls -l /
+total 0
+lrwxrwxrwx   1 root   root      7 Aug 26  2022 bin -> usr/bin
+drwxr-xr-x   2 root   root      6 Apr 15  2020 boot
+drwxr-xr-x   6 nobody nogroup 420 Mar 22 03:29 dev
+drwxr-xr-x   1 root   root    154 Mar 22 03:38 etc
+drwxr-xr-x   1 root   root     20 Sep  6  2022 home
+drwxr-xr-x   1 gitpod gitpod   44 Mar 21 08:38 ide
+lrwxrwxrwx   1 root   root      7 Aug 26  2022 lib -> usr/lib
+lrwxrwxrwx   1 root   root      9 Aug 26  2022 lib32 -> usr/lib32
+lrwxrwxrwx   1 root   root      9 Aug 26  2022 lib64 -> usr/lib64
+lrwxrwxrwx   1 root   root     10 Aug 26  2022 libx32 -> usr/libx32
+drwxr-xr-x   2 root   root      6 Aug 26  2022 media
+drwxr-xr-x   2 root   root      6 Aug 26  2022 mnt
+drwxr-xr-x   1 gitpod root     30 Sep  6  2022 nix
+drwxr-xr-x   1 root   root     24 Mar 22 03:38 opt
+dr-xr-xr-x 701 nobody nogroup   0 Mar 22 03:29 proc
+drwx------   1 root   root     27 Mar 22 04:16 root
+drwxr-xr-x   1 root   root    107 Mar 22 03:39 run
+lrwxrwxrwx   1 root   root      8 Aug 26  2022 sbin -> usr/sbin
+drwxr-xr-x   2 root   root      6 Aug 26  2022 srv
+dr-xr-xr-x  13 nobody nogroup   0 Mar 22 03:29 sys
+drwxrwxrwt   3 root   root    240 Mar 22 04:08 tmp
+drwxr-xr-x   1 root   root     69 Mar  9 09:36 usr
+drwxr-xr-x   1 root   root     41 Aug 26  2022 var
+drwxr-xr-x   9 gitpod gitpod  162 Mar 22 03:38 workspace
+root@burreetoman-awsbootcamp-7rz5zznc8ob:~# ls -l /workspace
+total 56076
+drwxr-xr-x 3 gitpod gitpod       78 Mar 17 18:17 aws
+drwxr-xr-x 9 gitpod gitpod     4096 Mar 22 03:39 aws-bootcamp-cruddur-2023
+-rw-r--r-- 1 gitpod gitpod 57414207 Mar 22 03:29 awscliv2.zip
+root@burreetoman-awsbootcamp-7rz5zznc8ob:~# git clean -d -n  /workspace/aws-bootcamp-cruddur-2023
+fatal: not a git repository (or any of the parent directories): .git
+root@burreetoman-awsbootcamp-7rz5zznc8ob:~# 
+root@burreetoman-awsbootcamp-7rz5zznc8ob:~# gcd  /workspace/aws-bootcamp-cruddur-2023
+root@burreetoman-awsbootcamp-7rz5zznc8ob:/workspace/aws-bootcamp-cruddur-2023# cd /workspace/aws-bootcamp-cruddur-2023
+root@burreetoman-awsbootcamp-7rz5zznc8ob:/workspace/aws-bootcamp-cruddur-2023# git clean -d -n
+Would remove docker/
+root@burreetoman-awsbootcamp-7rz5zznc8ob:/workspace/aws-bootcamp-cruddur-2023# git clean -d
+fatal: clean.requireForce defaults to true and neither -i, -n, nor -f given; refusing to clean
+root@burreetoman-awsbootcamp-7rz5zznc8ob:/workspace/aws-bootcamp-cruddur-2023# git clean -d -f
+Removing docker/
+root@burreetoman-awsbootcamp-7rz5zznc8ob:/workspace/aws-bootcamp-cruddur-2023# 
 
-
-
-
-
-
-
-
-
+# SOURCE: https://linuxize.com/post/how-to-remove-untracked-files-in-git/
 
 # ===========
 # END OF FILE
